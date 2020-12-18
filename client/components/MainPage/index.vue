@@ -1,6 +1,5 @@
 <template>
   <main>
-    <Header/>
     <div class="hero">
       <div class="hero__banner">
         <div class="hero__banner-title">Стремись к большему</div>
@@ -8,7 +7,7 @@
           произведите впечатление.
         </div>
       </div>
-      <button class="hero-btn">Зарегистрироваться</button>
+      <button class="hero-btn" @click='()=>$store.commit("", true)' >Зарегистрироваться</button>
     </div>
     <div class="content">
       <div class="cards">
@@ -34,7 +33,6 @@
         <div class="knowledge__body"></div>
       </div>
     </div>
-    <Footer />
   </main>
 </template>
 
