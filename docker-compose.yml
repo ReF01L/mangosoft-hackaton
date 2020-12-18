@@ -7,7 +7,7 @@ services:
     image: workspace_php
     restart: always
     volumes:
-      - ./api:/srv/api:rw,cached
+      - ./api:/srv/api:rw
       - ./api/docker/php/conf.d/custom.dev.ini:/usr/local/etc/php/conf.d/custom.ini
 
   queue:
@@ -19,8 +19,18 @@ services:
     command: php artisan queue:work redis --tries=3 --delay=300
     restart: always
     volumes:
-      - ./api:/srv/api:rw,cached
+      - ./api:/srv/api:rw
       - ./api/docker/php/conf.d/custom.dev.ini:/usr/local/etc/php/conf.d/custom.ini
+
+  scheduler:
+    container_name: scheduler
+    image: workspace_php
+    depends_on:
+      - php
+    command: [ "/bin/sh", "-ec", "while true; do php artisan schedule:run; sleep 60 ; done" ]
+    restart: always
+    volumes:
+      - ./api:/srv/api:rw
 
   proxy:
     image: nginx:alpine
@@ -30,8 +40,10 @@ services:
       - ./api/public:/srv/api/public:rw
       - ./proxy/docker/nginx/nginx.prod.conf:/etc/nginx/nginx.conf
       - ./proxy/docker/nginx/conf.d/api.prod.conf:/etc/nginx/conf.d/api.conf
+      - ./proxy/docker/nginx/conf.d/client.prod.conf:/etc/nginx/conf.d/default.conf
     ports:
       - "8080:8080"
+      - "80:80"
 
   db:
     image: postgres:12-alpine
@@ -43,7 +55,7 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data:rw
     expose:
-      - "5432"
+      - 5432
 
   redis:
     image: redis:alpine
@@ -53,14 +65,14 @@ services:
     volumes:
       - redis-data:/var/lib/redis
 
-  vuejs:
-    container_name: vuejs
+  nuxtjs:
+    container_name: nuxtjs
     build:
       context: ./client
-    image: workspace_vue
+    image: workspace_nuxtjs
     restart: always
-    ports:
-      - "80:80"
+    expose:
+      - 3000
 
 volumes:
   db-data: {}
