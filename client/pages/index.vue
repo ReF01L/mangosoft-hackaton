@@ -1,34 +1,40 @@
 <template>
   <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">
-        client
-      </h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+    <MainPage />
+<!--    <div>-->
+<!--      <Logo />-->
+<!--      <h1 class="title">-->
+<!--        client-->
+<!--      </h1>-->
+<!--      <div class="links">-->
+<!--        <a-->
+<!--          href="https://nuxtjs.org/"-->
+<!--          target="_blank"-->
+<!--          rel="noopener noreferrer"-->
+<!--          class="button&#45;&#45;green"-->
+<!--        >-->
+<!--          Documentation-->
+<!--        </a>-->
+<!--        <a-->
+<!--          href="https://github.com/nuxt/nuxt.js"-->
+<!--          target="_blank"-->
+<!--          rel="noopener noreferrer"-->
+<!--          class="button&#45;&#45;grey"-->
+<!--        >-->
+<!--          GitHub-->
+<!--        </a>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
 <script>
-export default {}
+  import MainPage from '../components/MainPage/index'
+export default {
+    components: {
+      MainPage
+    }
+}
 </script>
 
 <style>
