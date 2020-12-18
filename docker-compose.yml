@@ -1,0 +1,67 @@
+version: '3.4'
+
+services:
+  php:
+    build:
+      context: ./api
+    image: workspace_php
+    restart: always
+    volumes:
+      - ./api:/srv/api:rw,cached
+      - ./api/docker/php/conf.d/custom.dev.ini:/usr/local/etc/php/conf.d/custom.ini
+
+  queue:
+    build:
+      context: ./api
+    image: workspace_php
+    depends_on:
+      - php
+    command: php artisan queue:work redis --tries=3 --delay=300
+    restart: always
+    volumes:
+      - ./api:/srv/api:rw,cached
+      - ./api/docker/php/conf.d/custom.dev.ini:/usr/local/etc/php/conf.d/custom.ini
+
+  proxy:
+    image: nginx:alpine
+    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    restart: always
+    volumes:
+      - ./api/public:/srv/api/public:rw
+      - ./proxy/docker/nginx/nginx.prod.conf:/etc/nginx/nginx.conf
+      - ./proxy/docker/nginx/conf.d/api.prod.conf:/etc/nginx/conf.d/api.conf
+    ports:
+      - "8080:8080"
+
+  db:
+    image: postgres:12-alpine
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    restart: always
+    volumes:
+      - db-data:/var/lib/postgresql/data:rw
+    expose:
+      - "5432"
+
+  redis:
+    image: redis:alpine
+    restart: always
+    expose:
+      - 6379
+    volumes:
+      - redis-data:/var/lib/redis
+
+  vuejs:
+    container_name: vuejs
+    build:
+      context: ./client
+    image: workspace_vue
+    restart: always
+    ports:
+      - "80:80"
+
+volumes:
+  db-data: {}
+  redis-data: {}
