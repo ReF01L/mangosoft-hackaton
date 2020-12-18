@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Cookie;
 
 class LogoutService
 {
-    public function logout(Request $request)
+    public static function logout(Request $request)
     {
         $request->user('api')->token()->revoke();
         $cookie = Cookie::forget('_token');

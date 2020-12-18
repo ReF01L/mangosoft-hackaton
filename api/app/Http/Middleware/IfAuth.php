@@ -17,7 +17,7 @@ class IfAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->user()) {
+        if ($request->user('api')) {
             return $next($request);
         }
         return response()->json([], Response::HTTP_FORBIDDEN);

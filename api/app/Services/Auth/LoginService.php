@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Validator;
 class LoginService
 {
     const RULES = [
-        'email' => 'required|string|max:255|unique:users,email',
+        'email' => 'required|string|max:255|exists:users,email',
         'password' => 'required|string|min:6|max:255',
     ];
 
-    public function login(Request $request)
+    public static function login(Request $request)
     {
         $validator = Validator::make($request->all(), self::RULES);
         if ($validator->fails()) {
@@ -25,8 +25,8 @@ class LoginService
 
         $params = [
             'grant_type' => 'password',
-            'client_id' => config('passport.PASSPORT_CLIENT_ID'),
-            'client_secret' => config('passport.PASSPORT_CLIENT_SECRET'),
+            'client_id' => config('passport.id'),
+            'client_secret' => config('passport.secret'),
             'username' => $request['email'],
             'password' => $request['password'],
             'scope' => '*'

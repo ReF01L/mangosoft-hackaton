@@ -2,6 +2,10 @@
 
 return [
 
+    'id' => env('PASSPORT_CLIENT_ID', 1),
+
+    'secret' => env('PASSPORT_CLIENT_SECRET', 'secret'),
+
     /*
     |--------------------------------------------------------------------------
     | Encryption Keys
