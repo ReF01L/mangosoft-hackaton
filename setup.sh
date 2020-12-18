@@ -12,4 +12,6 @@ docker-compose exec php php artisan migrate:fresh --seed
 
 docker-compose exec php php artisan secret:generate
 
+docker-compose up -d --force-recreate
+
 echo 'Project is ready for testing!'
