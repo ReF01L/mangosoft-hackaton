@@ -1,7 +1,11 @@
 <template>
   <header>
-    <div class="logo"></div>
+    <div class="logo">
+      <img src="/logo.png" alt="">
+    </div>
     <div class="profile-image">
+      <img src="/i_people.png" alt="">
+      <span>Войти</span>
     </div>
   </header>
 </template>
@@ -18,15 +22,30 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 15em;
-    background: #cb9c3e;
+    background: #fff;
   }
   .logo {
-    background-color: #ccc;
-    padding: 50px 150px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border-radius: 50px;
+    padding: 5px 10em 5px 10px;
+    background: rgba(255, 255, 255, 0.4);
   }
   .profile-image {
-    border-radius: 50px;
-    background-color: #ccc;
-    padding: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & img {
+      border-radius: 50px;
+      background-color: #FDFDFD;
+      box-shadow: 0px 4px 10px #CBC09F;
+      padding: 20px;
+    }
+    & span {
+      color: black;
+      font-size: 24px;
+      margin: 20px;
+    }
   }
 </style>

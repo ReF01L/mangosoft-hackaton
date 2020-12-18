@@ -3,23 +3,23 @@
     <Header/>
     <div class="hero">
       <div class="hero__banner">
-        <div class="hero__banner-title">Стремись к большему</div>
-        <div class="hero__banner-content">Знания помогают оставаться на шаг впереди. Получите актуальные навыки и
-          произведите впечатление.
+        <div class="hero__banner-title">Знания помогают оставаться на шаг впереди.</div>
+        <div class="hero__banner__layer">
+          <button class="hero-btn">Зарегистрироваться</button>
+          <img src="/hero_women.png" alt="">
         </div>
       </div>
-      <button class="hero-btn">Зарегистрироваться</button>
     </div>
     <div class="content">
       <div class="cards">
-        <AboutUs v-for="card in cards"/>
+        <AboutUs v-for="card in cards" v-bind:key="card.id"/>
       </div>
       <div class="search">
         <h2 class="search-title">Большой выбор курсов!</h2>
         <input class="search-input" placeholder="Поиск" type="search" v-model="search">
       </div>
       <div class="courses">
-        <Course v-for="course in courses"/>
+        <Course v-for="course in courses" v-bind:key="course.id"/>
       </div>
       <div class="interests">
         <h2 class="interests-title">Выбери сферу своих интересов</h2>
@@ -34,7 +34,7 @@
         <div class="knowledge__body"></div>
       </div>
     </div>
-    <Footer />
+    <Footer/>
   </main>
 </template>
 
@@ -74,7 +74,7 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
-    background: #B58743;
+    background: #fff;
     padding: 50px 15em;
     width: 100vw;
 
@@ -84,14 +84,23 @@
       flex-direction: column;
       justify-content: flex-start;
       align-items: flex-start;
-      color: #fff;
 
-      &-title {
-        font-size: 32px;
+      &__layer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        & img {
+          align-self: flex-end;
+        }
       }
 
-      &-content {
-        font-size: 22px;
+      &-title {
+        font-size: 70px;
+        color: #000;
+        word-break: break-word;
+        max-width: 70%;
+        text-align: left;
       }
     }
 
@@ -112,6 +121,7 @@
 
   .content {
     padding: 0 15em;
+
     .cards {
       display: flex;
       justify-content: space-between;
