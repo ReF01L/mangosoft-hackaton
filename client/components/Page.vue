@@ -3,7 +3,7 @@
     <Header/>
     <slot/>
     <Footer/>
-    <Overlay v-if='registerModal'>
+    <Overlay v-if='$store.state.modals.register'>
       <AuthForm/>
     </Overlay>
   </div>
@@ -17,17 +17,10 @@ import Footer from "~/components/Footer";
 
 export default {
   name: "Page",
-  async asyncData({store}) {
-    return {
-      registerModal: store.state.registerModal,
-    }
-  },
   data() {
-    return {
-      registerModal: false,
-    }
+    return {}
   },
-  components: {AuthForm, Overlay}
+  components: {AuthForm, Overlay, Header, Footer}
 }
 </script>
 
