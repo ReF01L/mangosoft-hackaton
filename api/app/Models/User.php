@@ -15,9 +15,16 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens, HasRoles;
 
     protected $fillable = [
-        'name',
         'email',
-        'password',
+        'phone',
+        'first_name',
+        'second_name',
+        'name',
+        'username',
+        'company_name',
+        'company_position',
+        'company_description',
+        'active',
     ];
 
     protected $hidden = [
@@ -28,6 +35,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function findForPassport($username)
+    {
+        return $this->where([
+            'username' => $username,
+            'active' => true,
+        ])->first();
+    }
+
+    public function getNameAttribute()
+    {
+        return "{$this->first_name} {$this->second_name[0]}";
+    }
 
     public function setPasswordAttribute($value)
     {

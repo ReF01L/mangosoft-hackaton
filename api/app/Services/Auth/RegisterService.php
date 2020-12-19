@@ -9,31 +9,30 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
+use Spatie\Permission\Models\Role;
 
 class RegisterService
 {
-    const TYPE_FUNCTIONS = [
-        'student' => 'registerStudent',
-        'teacher' => 'registerTeacher',
-        'company' => 'registerCompany',
-    ];
-
     const RULES = [
         'common' => [
             'first_name' => 'required|string|max:255',
             'second_name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255',
+            'phone' => 'required|string|unique:users,phone|max:255',
+            'username' => 'required|string|unique:users,username|max:255',
             'email' => 'required|string|email|unique:users,email|max:255',
             'password' => 'required|string|min:6|max:255|confirmed',
+            'skills' => 'required|array',
         ],
         'student' => [
 
         ],
         'teacher' => [
-            'subject' => 'required|string|max:255'
+
         ],
         'company' => [
-            'company_name' => 'required|string|max:255|unique:users,company_name'
+            'company_name' => 'required|string|max:255',
+            'company_position' => 'required|string|max:255',
+            'company_description' => 'nullable',
         ],
     ];
 
@@ -46,8 +45,13 @@ class RegisterService
             return response()->json(['errors' => $validator->errors()], Response::HTTP_FORBIDDEN);
         }
 
+        $entity = null;
+
         try {
-            User::create($validator->validated());
+            $entity = User::create($validator->validated());
+            $entity->assignRole(Role::where(['name' => $request->get('role')])->first());
+            $entity->save();
+            self::saveSkills($entity, $request->get('skills'));
         } catch (ValidationException $e) {
             return response()->json([], Response::HTTP_FORBIDDEN);
         }
@@ -55,18 +59,8 @@ class RegisterService
         return response()->json([], Response::HTTP_CREATED);
     }
 
-    private static function registerStudent(Request $request)
+    private static function saveSkills(User $user, array $skills)
     {
-
-    }
-
-    private static function registerTeacher(Request $request)
-    {
-
-    }
-
-    private static function registerCompany(Request $request)
-    {
-
+        // saving skills
     }
 }
