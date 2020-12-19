@@ -105,8 +105,8 @@
     &-btn {
       background: #FAD150;
       color: #000;
-      border-radius: 30px;
-      padding: 15px;
+      border-radius: 50px;
+      padding: 32px 76px;
       border: none;
       outline: none;
       font-weight: 700;
