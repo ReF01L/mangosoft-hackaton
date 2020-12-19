@@ -12,13 +12,13 @@
       <div class='input-icon'/>
 
       <div class='selector' v-if='search'>
-        <Close :onclose='() => {this.search = ""}'/>
+        <Close @click='search = ""'/>
         <div class='smol-title'>
           Рекомендуем
         </div>
 
         <div class='tabs'>
-          <div class='tab' v-for='tag in (filteredList.length? filteredList : listAll)' @click='selected.push(tag); listAll = listAll.filter(({id})=> id !== tag.id)'>
+          <div class='tab' v-for='tag in filteredList' @click='selected.push(tag); listAll = listAll.filter(({id})=> id !== tag.id)'>
             {{ tag.name }}
           </div>
         </div>
@@ -48,10 +48,21 @@ export default {
   },
   computed: {
     filteredList() {
-      return this.listAll.filter(({name}) => {
+      const filtered = this.listAll.filter(({name}) => {
         return name.toLowerCase().includes(this.search.toLowerCase())
       })
+      return filtered.length ? filtered : listAll
     }
+  },
+  methods: {
+    addTag() {
+
+    },
+    removeTag() {
+
+    },
+
+
   }
 
 }
@@ -67,7 +78,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  &:not(:empty){
+
+  &:not(:empty) {
     margin-bottom: 30px;
 
   }

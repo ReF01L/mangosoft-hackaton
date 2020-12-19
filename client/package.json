@@ -11,7 +11,10 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "element-ui": "^2.14.1",
-    "nuxt": "^2.14.6"
+    "material-design-icons-iconfont": "^6.1.0",
+    "nuxt": "^2.14.6",
+    "slug": "^4.0.2",
+    "vue-cal": "^3.9.0"
   },
   "devDependencies": {
     "babel-plugin-component": "^1.1.1",

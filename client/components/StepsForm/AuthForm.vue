@@ -3,7 +3,7 @@
     <div class='close' @click='$store.commit("modals/setAuth", false)'/>
 
 
-    <div v-if='step === 0' class='step first'>
+    <div  class='step first'>
       <div class='logo'/>`
 
       <div class='form auth'>
@@ -21,11 +21,6 @@
       </div>
     </div>
 
-    <div v-if='step === 1'>
-      <Steps/>
-
-
-    </div>
 
 
   </div>

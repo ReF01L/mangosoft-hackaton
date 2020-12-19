@@ -1,12 +1,11 @@
 <template>
 
-  <div class='close' @click='onclose()'/>
+  <div class='close' @click='$emit("click")'/>
 </template>
 
 <script>
 export default {
   name: "Close",
-  props: ['onclose']
 }
 </script>
 

@@ -1,3 +1,4 @@
+
 <template>
   <div class='AuthForm'>
     <div class='close' @click='$store.commit("modals/setRegister", false)'/>
@@ -80,7 +81,7 @@ import Steps from "./Steps";
 import Logo from "~/components/Logo";
 import TextField from "~/components/StepsForm/TextField";
 import TabsSelector from "~/components/StepsForm/TabsSelector";
-
+// component is
 export default {
   name: "AuthForm",
   components: {TabsSelector, TextField, Logo, Steps},
