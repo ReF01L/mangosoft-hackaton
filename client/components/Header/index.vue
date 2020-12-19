@@ -1,8 +1,8 @@
 <template>
   <header>
-    <div class="logo">
+    <a class="logo" href='/'>
       <img src="/logo.png" alt="">
-    </div>
+    </a>
     <div @click='$store.commit("modals/setAuth", true)'  class="profile-image">
       <img src="/i_people.png" alt="">
       <span>Войти</span>
@@ -33,6 +33,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     & img {
       border-radius: 50px;
       background-color: #FDFDFD;
