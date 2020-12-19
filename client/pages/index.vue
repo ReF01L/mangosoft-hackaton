@@ -1,18 +1,17 @@
 <template>
-  <div>
+  <Page>
     <MainPage/>
-  </div>
+  </Page>
 </template>
 
 <script>
-  import MainPage from '../components/MainPage/index'
-  export default {
-    components: {
-      MainPage
-    }
-  }
+import MainPage from '../components/MainPage/index'
+import Page from "~/components/Page";
+
+export default {
+  components: {MainPage, Page}
+}
 </script>
 
 <style>
-
 </style>
