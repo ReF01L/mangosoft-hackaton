@@ -1,7 +1,9 @@
 <template>
   <footer>
     <div class="info">
-      <div class="info__logo"></div>
+      <div class="info__logo">
+        <img src="/f_logo.png" alt="">
+      </div>
       <div class="info-copy">&copy; 2020 ООО "MangoSoft"</div>
       <div class="info-policy">Политика конфиденциальности</div>
     </div>
@@ -30,8 +32,9 @@
     justify-content: center;
     align-items: flex-start;
     &__logo {
-      background-color: #ccc;
-      padding: 50px 150px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
     }
     &-copy {
       padding: 10px 0;
@@ -51,12 +54,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 25px;
+    padding: 20px 50px;
     font-weight: 700;
-    font-size: 20px;
-    background-color: transparent;
-    border-radius: 20px;
-    border: 1px solid black;
+    font-size: 24px;
+    background-color: #3F3D56;
+    color: #fff;
+    border-radius: 50px;
+    border: none;
     outline: none;
   }
 </style>

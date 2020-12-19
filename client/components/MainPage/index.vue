@@ -1,24 +1,25 @@
 <template>
   <main>
+    <Header/>
     <div class='hero'>
       <div class='hero__banner'>
-        <div class='hero__banner-title'>Стремись к большему</div>
-        <div class='hero__banner-content'>Знания помогают оставаться на шаг впереди. Получите актуальные навыки и
-          произведите впечатление.
+        <div class='hero__banner-title'>Знания помогают оставаться на шаг впереди.</div>
+        <div class='hero__banner__layer'>
+          <button class='hero-btn' @click='()=>$store.commit("modals/setRegister", true)'>Зарегистрироваться</button>
+          <img src='/hero_women.png' alt=''>
         </div>
       </div>
-      <button class='hero-btn' @click='()=>$store.commit("modals/setRegister", true)'>Зарегистрироваться</button>
     </div>
     <div class='content'>
       <div class='cards'>
-        <AboutUs v-for='card in cards'/>
+        <AboutUs v-for='card in cards' v-bind:key='card.id'/>
       </div>
       <div class='search'>
         <h2 class='search-title'>Большой выбор курсов!</h2>
         <input class='search-input' placeholder='Поиск' type='search' v-model='search'>
       </div>
       <div class='courses'>
-        <Course v-for='course in courses'/>
+        <Course v-for='course in courses' v-bind:key='course.id'/>
       </div>
       <div class='interests'>
         <h2 class='interests-title'>Выбери сферу своих интересов</h2>
@@ -120,9 +121,36 @@ main {
   .search {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    margin: 50px auto;
+    background: #fff;
+    padding: 50px 15em;
+    width: 100vw;
+
+    &__banner {
+      padding: 150px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+
+      &__layer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+
+        & img {
+          align-self: flex-end;
+        }
+      }
+
+      &-title {
+        font-size: 70px;
+        color: #000;
+        word-break: break-word;
+        max-width: 70%;
+        text-align: left;
+      }
+    }
 
     &-title {
       color: #000;
@@ -148,17 +176,14 @@ main {
     flex-wrap: wrap;
   }
 
-  .interests {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 15px auto;
 
-    &-title {
-      font-size: 44px;
-      font-weight: 700;
-      padding: 15px;
+  . content {
+    padding: 0 15em;
+
+    .cards {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
     &__body {
