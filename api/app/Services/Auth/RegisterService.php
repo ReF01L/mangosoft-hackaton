@@ -21,7 +21,7 @@ class RegisterService
             'phone' => 'required|string|unique:users,phone|max:255',
             'username' => 'required|string|unique:users,username|max:255',
             'email' => 'required|string|email|unique:users,email|max:255',
-            'password' => 'required|string|min:6|max:255|confirmed',
+            'password' => 'required|string|min:6|max:255',
             'skills' => 'required|array',
         ],
         'student' => [
@@ -40,6 +40,7 @@ class RegisterService
     public static function register(Request $request)
     {
         $role = $request->get('role');
+        if (!$role) { return response()->json([], Response::HTTP_FORBIDDEN); }
         $rules = array_merge(self::RULES['common'], self::RULES[$role]);
         $validator = Validator::make($request->all(), $rules);
 

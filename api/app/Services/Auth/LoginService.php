@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Validator;
 class LoginService
 {
     const RULES = [
-        'email' => 'required|string|max:255|exists:users,email',
+        'username' => 'required|string|max:255|exists:users,username',
         'password' => 'required|string|min:6|max:255',
     ];
 
@@ -27,8 +27,8 @@ class LoginService
             'grant_type' => 'password',
             'client_id' => config('passport.id'),
             'client_secret' => config('passport.secret'),
-            'username' => $request['email'],
-            'password' => $request['password'],
+            'username' => $request->get('username'),
+            'password' => $request->get('password'),
             'scope' => '*'
         ];
 

@@ -25,17 +25,13 @@ class User extends Authenticatable
         'company_position',
         'company_description',
         'active',
+        'password',
 
         'description',
     ];
 
     protected $hidden = [
         'password',
-        'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 
     const STUDENT = 'student';
@@ -48,11 +44,6 @@ class User extends Authenticatable
             'username' => $username,
             'active' => true,
         ])->first();
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'username';
     }
 
     public function skills($role = self::TEACHER)

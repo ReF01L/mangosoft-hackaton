@@ -21,12 +21,10 @@ class UserController extends Controller
 
     public function show(Request $request, $username)
     {
-        $user = User::find($username);
-        if ($user) {
-            return response()->json([
-                'data' => new UserResource($user)
-            ], Response::HTTP_OK);
-        }
-        return response()->json([], Response::HTTP_NOT_FOUND);
+        $user = User::where(['username' => $username])->first();
+        if (!$user) { return response()->json([], Response::HTTP_NOT_FOUND); }
+        return response()->json([
+            'data' => new UserResource($user)
+        ], Response::HTTP_OK);
     }
 }
