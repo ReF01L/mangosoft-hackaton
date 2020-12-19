@@ -1,8 +1,6 @@
 <template>
   <label class='TextField'>
-    <div class='label'>
-      {{ label }}
-    </div>
+    <div :class='{label: true, required}'>{{label}}</div>
     <div class='field'>
       <input :placeholder='placeholder' :type='show ? "text" : type' :class='{input: true, required}'>
       <div
@@ -71,6 +69,14 @@ export default {
     font-size: 15px;
     line-height: 17px;
     margin-bottom: 15px;
+
+    &.required {
+      &:after {
+        content: '*';
+        color: #FFCC33;
+
+      }
+    }
   }
 
   .field {
@@ -90,17 +96,14 @@ export default {
     box-sizing: border-box;
     border-radius: 4px;
 
+    font-size: 14px;
+    line-height: 23px;
+
     &[type='password'] {
       color: #FFCC33;
     }
 
-    &.required{
-      &:after{
-        content: '*';
-        color: #FFCC33;
 
-      }
-    }
   }
 }
 

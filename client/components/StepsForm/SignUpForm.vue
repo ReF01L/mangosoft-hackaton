@@ -50,11 +50,27 @@
           Укажите сферы интересов
         </div>
         <TabsSelector/>
-
-        <div class='button next' @click='step = 1'>
+        <div class='title'>
+          Введите данные организации
+        </div>
+        <div class='fields'>
+          <TextField :required='true' label='Наименование' placeholder='ООО Школа математики'/>
+          <TextField :required='true' label='Что-то еще' placeholder='Я не знаю что это и сколько такого надо'/>
+        </div>
+        <div class='button next' @click='step = 2'>
           Далее
         </div>
       </div>
+    </div>
+
+    <div v-if='step === 2' class='step second'>
+      <div class='logo'/>
+      <div class='end-text'>
+        <span>
+          Для завершения регистрации подтвердите свой <b>E-mail!</b>
+        </span>
+      </div>
+
     </div>
   </div>
 </template>
@@ -77,6 +93,16 @@ export default {
 </script>
 
 <style scoped lang='scss'>
+
+.end-text{
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 36px;
+  text-align: center;
+  max-width: 472px;
+
+}
+
 .checkbox {
   display: flex;
   align-items: center;
@@ -215,7 +241,7 @@ export default {
     background-image: url("../../static/logo.svg");
 
     margin-bottom: 31px;
-    margin-top: 48px;
+    //margin-top: 48px;
   }
 
   .close {

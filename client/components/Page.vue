@@ -4,13 +4,13 @@
     <slot/>
     <Footer/>
     <transition name='fade'>
-      <Overlay v-if='$store.state.modals.register'>
-        <SignUpForm/>
+      <Overlay v-if='$store.state.modals.auth'>
+        <AuthForm/>
       </Overlay>
     </transition>
     <transition name='fade'>
-      <Overlay v-if='$store.state.modals.auth'>
-        <AuthForm/>
+      <Overlay v-if='$store.state.modals.register'>
+        <SignUpForm/>
       </Overlay>
     </transition>
 

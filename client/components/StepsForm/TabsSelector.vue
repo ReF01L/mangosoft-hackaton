@@ -2,25 +2,24 @@
   <div class='TabsSelector'>
 
     <div class='tabs'>
-      <div class='tab' v-for='name in ["Дизайн", "Математический анализ"]'>
-        {{ name }}
+      <div class='tab' v-for='tag in selected' @click='listAll.push(tag); selected = selected.filter(({id})=> id !== tag.id)'>
+        {{ tag.name }}
         <div class='tab-icon'/>
       </div>
-
     </div>
     <div class='field'>
-      <input placeholder='Поиск' class='input'/>
+      <input placeholder='Поиск' class='input' v-model='search'/>
       <div class='input-icon'/>
 
-      <div class='selector'>
-        <Close :onclose='() => {this.open = false}'/>
+      <div class='selector' v-if='search'>
+        <Close :onclose='() => {this.search = ""}'/>
         <div class='smol-title'>
           Рекомендуем
         </div>
 
         <div class='tabs'>
-          <div class='tab' v-for='name in ["Дизайн", "Математический анализ"]'>
-            {{ name }}
+          <div class='tab' v-for='tag in (filteredList.length? filteredList : listAll)' @click='selected.push(tag); listAll = listAll.filter(({id})=> id !== tag.id)'>
+            {{ tag.name }}
           </div>
         </div>
       </div>
@@ -36,9 +35,25 @@ export default {
   components: {Close},
   data() {
     return {
-      open: false
+      open: false,
+      listAll: [
+        {id: 0, name: 'Дизайн'},
+        {id: 1, name: 'Математический анализ'},
+        {id: 2, name: 'Верстка'},
+        {id: 3, name: 'Теория графов'},
+      ],
+      selected: [],
+      search: ''
+    }
+  },
+  computed: {
+    filteredList() {
+      return this.listAll.filter(({name}) => {
+        return name.toLowerCase().includes(this.search.toLowerCase())
+      })
     }
   }
+
 }
 </script>
 
@@ -52,7 +67,10 @@ export default {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-bottom: 30px;
+  &:not(:empty){
+    margin-bottom: 30px;
+
+  }
 
   .tab {
     height: 32px;
@@ -91,7 +109,7 @@ export default {
 
 .field {
   position: relative;
-
+  margin-bottom: 30px;
 
   .input {
     width: 100%;
@@ -101,6 +119,7 @@ export default {
     box-sizing: border-box;
     border-radius: 100px;
     padding: 0 32px;
+
   }
 
   .input-icon {
@@ -113,9 +132,11 @@ export default {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
+    cursor: pointer;
   }
 
   .selector {
+    z-index: 3;
     position: absolute;
     left: 0;
     right: 0;
