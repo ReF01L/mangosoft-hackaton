@@ -25,6 +25,8 @@ class User extends Authenticatable
         'company_position',
         'company_description',
         'active',
+
+        'description',
     ];
 
     protected $hidden = [
@@ -36,12 +38,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    const STUDENT = 'student';
+    const TEACHER = 'teacher';
+    const COMPANY = 'company';
+
     public function findForPassport($username)
     {
         return $this->where([
             'username' => $username,
             'active' => true,
         ])->first();
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'username';
+    }
+
+    public function skills($role = self::TEACHER)
+    {
+        return $this->belongsToMany(Skill::class, 'skill_user', 'user_id', 'skill_id')
+            ->wherePivotIn('role', [$role]);
     }
 
     public function getNameAttribute()

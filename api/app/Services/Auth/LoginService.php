@@ -51,6 +51,8 @@ class LoginService
 
         $response = json_decode($response->getContent());
 
-        return response('')->withCookie('_token', $response->access_token, $response->expires_in);
+        return response()
+            ->json([$response])
+            ->withCookie('_token', $response->access_token, $response->expires_in);
     }
 }

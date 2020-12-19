@@ -30,6 +30,8 @@ class CreateUsersTable extends Migration
 
             $table->boolean('active')->default(false);
 
+            $table->text('description')->nullable();
+
             $table->timestamps();
         });
     }

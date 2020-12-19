@@ -7,6 +7,7 @@ namespace App\Services\Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Models\Role;
@@ -38,7 +39,8 @@ class RegisterService
 
     public static function register(Request $request)
     {
-        $rules = array_merge(self::RULES['common'], self::RULES[$request->get('role')]);
+        $role = $request->get('role');
+        $rules = array_merge(self::RULES['common'], self::RULES[$role]);
         $validator = Validator::make($request->all(), $rules);
 
         if ($validator->fails()) {
@@ -49,9 +51,9 @@ class RegisterService
 
         try {
             $entity = User::create($validator->validated());
-            $entity->assignRole(Role::where(['name' => $request->get('role')])->first());
+            $entity->assignRole(Role::where(['name' => $role])->first());
             $entity->save();
-            self::saveSkills($entity, $request->get('skills'));
+            self::saveSkills($role, $entity, $request->get('skills'));
         } catch (ValidationException $e) {
             return response()->json([], Response::HTTP_FORBIDDEN);
         }
@@ -59,8 +61,15 @@ class RegisterService
         return response()->json([], Response::HTTP_CREATED);
     }
 
-    private static function saveSkills(User $user, array $skills)
+    private static function saveSkills(string $role, User $user, array $skills)
     {
-        // saving skills
+        foreach ($skills as $skill) {
+            $data = [
+                'user_id' => $user->id,
+                'skill_id' => $skill,
+                'role' => $role,
+            ];
+            DB::table('skill_user')->updateOrInsert($data, $data);
+        }
     }
 }
