@@ -1,8 +1,7 @@
 <template>
   <div class="card">
     <div class="card-title" @click="DialogVisible=true">Оцените занятие!</div>
-    <div class="card-content" @click="DialogVisible=true">В случае возникновения недопонимания обратитесь в поддержку.
-    </div>
+    <div class="card-content" @click="DialogVisible=true">В случае возникновения недопонимания обратитесь в поддержку.</div>
 
     <el-dialog class="dialog" v-if="type === 1"
                :visible.sync="DialogVisible"

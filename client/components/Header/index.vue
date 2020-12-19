@@ -3,20 +3,18 @@
     <a class="logo" href='/'>
       <img src="/logo.png" alt="">
     </a>
-    <div @click='$store.commit("modals/setAuth", true)'  class="profile-image"/>
     <div class="profile">
       <div class="notification">
         <div class="icon" @click="Active = !Active">
           <span>{{notifications <= 100 ? notifications : '100+'}}</span>
           <img src="/bell.png" alt="">
         </div>
-        <div class="notification__dropdown" :class="{active: Active}">
-          <NotificationDropdown/>
-        </div>
+        <NotificationDropdown class="notification__dropdown" :class="{active: Active}" />
       </div>
-
-      <img src="/i_people.png" alt="">
-      <span>Войти</span>
+      <div class="enter" @click='$store.commit("modals/setAuth", true)'>
+        <img src="/i_people.png" alt="">
+        <span>Войти</span>
+      </div>
     </div>
   </header>
 </template>
@@ -46,6 +44,17 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      & img {
+        border-radius: 50px;
+        background-color: #FDFDFD;
+        box-shadow: 0 4px 10px #CBC09F;
+        padding: 20px;
+      }
+      & > span {
+        color: black;
+        font-size: 24px;
+        margin: 20px;
+      }
       & .notification {
         &__dropdown {
           opacity: 0;
@@ -75,16 +84,18 @@
         justify-content: center;
         align-items: center;
       }
-      & img {
-        border-radius: 50px;
-        background-color: #FDFDFD;
-        box-shadow: 0 4px 10px #CBC09F;
-        padding: 20px;
-      }
-      & > span {
-        color: black;
-        font-size: 24px;
-        margin: 20px;
+      .enter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+          cursor: pointer;
+        }
+        & > span {
+          color: black;
+          font-size: 24px;
+          margin: 20px;
+        }
       }
     }
     display: flex;
@@ -92,23 +103,5 @@
     align-items: center;
     padding: 10px 15em;
     background: #fff;
-  }
-
-  .profile-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    & img {
-      border-radius: 50px;
-      background-color: #FDFDFD;
-      box-shadow: 0px 4px 10px #CBC09F;
-      padding: 20px;
-    }
-    & span {
-      color: black;
-      font-size: 24px;
-      margin: 20px;
-    }
   }
 </style>
