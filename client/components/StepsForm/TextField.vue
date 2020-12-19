@@ -1,8 +1,8 @@
 <template>
   <label class='TextField'>
-    <div :class='{label: true, required}'>{{label}}</div>
+    <div :class='{label: true, required}'>{{ label }}</div>
     <div class='field'>
-      <input :placeholder='placeholder' :type='show ? "text" : type' :class='{input: true, required}'>
+      <input :value='value' @input='updateValue($event.target.value)' :placeholder='placeholder' :type='show ? "text" : type' :class='{input: true, required}'>
       <div
         @click='show = !show'
         v-if='type === "password"'
@@ -18,11 +18,17 @@ export default {
     label: String,
     type: String,
     placeholder: String,
-    required: Boolean
+    required: Boolean,
+    value: String
   },
   data() {
     return {
-      show: false
+      show: false,
+    }
+  },
+  methods: {
+    updateValue: function (value) {
+      this.$emit('input', value)
     }
   },
   name: "TextField"
