@@ -6,7 +6,8 @@ use App\Http\Controllers\Api\{
     AuthController,
     UserController,
     SkillController,
-    LkController
+    LkController,
+    ScheduleController
 };
 
 /*
@@ -40,6 +41,8 @@ Route::group([
 ], function() {
     Route::get('', [UserController::class, 'index']);
     Route::get('{username}', [UserController::class, 'show']);
+
+    Route::get('{username}/schedule', [ScheduleController::class, 'showByUser']);
 });
 
 Route::group([
@@ -51,4 +54,6 @@ Route::group([
     Route::post('roles/{role}/add', [LkController::class, 'addRole']);
     Route::get('skills/{id}', [LkController::class, 'updateSkill']);
     Route::post('', [LkController::class, 'update']);
+
+    Route::get('schedule', [ScheduleController::class, 'showByLk']);
 });
