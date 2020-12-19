@@ -8,14 +8,14 @@
 
       <div class='form auth'>
         <div class='fields'>
-          <TextField required label='Логин'/>
+          <TextField :required='true' label='Логин'/>
           <TextField label='Пароль' type='password'/>
         </div>
 
         <div class='button' @click='$store.commit("modals/setRegister", false)'>
           Войти
         </div>
-        <div class='link'>
+        <div class='link' @click='step = 2'>
           Регистрация
         </div>
       </div>
@@ -23,6 +23,8 @@
 
     <div v-if='step === 1'>
       <Steps/>
+
+
     </div>
 
 

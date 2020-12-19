@@ -3,9 +3,11 @@
     <Header/>
     <slot/>
     <Footer/>
-    <Overlay v-if='$store.state.modals.register'>
-      <AuthForm/>
-    </Overlay>
+    <transition name='fade'>
+      <Overlay v-if='$store.state.modals.register'>
+        <AuthForm/>
+      </Overlay>
+    </transition>
   </div>
 </template>
 
@@ -34,5 +36,14 @@ export default {
 </style>
 <style lang='scss'>
 
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .15s;
+}
+
+.fade-enter, .fade-leave-to {
+  transition: opacity .1s;
+  opacity: 0;
+}
 
 </style>
