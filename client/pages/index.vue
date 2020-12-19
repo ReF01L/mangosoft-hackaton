@@ -1,5 +1,5 @@
 <template>
-  <Page>
+  <Page pageTitle='Главная'>
     <MainPage/>
   </Page>
 </template>

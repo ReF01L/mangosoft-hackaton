@@ -1,7 +1,5 @@
 <template>
-  <div class="container">
-    <main>
-      <Header/>
+  <Page pageTitle='Профиль'>
       <div class="content">
         <div class="hero">
           <div class="recs">
@@ -20,9 +18,7 @@
         </div>
         <Schedule/>
       </div>
-      <Footer/>
-    </main>
-  </div>
+  </Page>
 </template>
 
 <script>
@@ -38,9 +34,12 @@
   import Element from 'element-ui'
   import locale from 'element-ui/lib/locale/lang/ru-RU'
   import Vue from 'vue'
+  import Page from "~/components/Page";
 
   Vue.use(Element, { locale })
   Vue.use(ElementUI)
+
+
 
 
   export default {
@@ -50,7 +49,8 @@
       Info,
       Rec,
       Interest,
-      Schedule
+      Schedule,
+      Page
     },
     data() {
       return {

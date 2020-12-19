@@ -27,9 +27,20 @@ import SignUpForm from "~/components/StepsForm/SignUpForm";
 export default {
   name: "Page",
   data() {
-    return {}
+    return {
+
+    }
   },
-  components: {AuthForm, Overlay, Header, Footer, SignUpForm}
+  props: {
+    pageTitle: String
+  },
+  components: {AuthForm, Overlay, Header, Footer, SignUpForm},
+  head() {
+    return {
+      title: this.pageTitle + " - MangoEdu",
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/icon.png' }],
+    }
+  }
 }
 
 </script>
