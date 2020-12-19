@@ -5,9 +5,15 @@
     <Footer/>
     <transition name='fade'>
       <Overlay v-if='$store.state.modals.register'>
+        <SignUpForm/>
+      </Overlay>
+    </transition>
+    <transition name='fade'>
+      <Overlay v-if='$store.state.modals.auth'>
         <AuthForm/>
       </Overlay>
     </transition>
+
   </div>
 </template>
 
@@ -16,14 +22,16 @@ import Overlay from "~/components/Overlay";
 import AuthForm from "~/components/StepsForm/AuthForm";
 import Header from "~/components/Header";
 import Footer from "~/components/Footer";
+import SignUpForm from "~/components/StepsForm/SignUpForm";
 
 export default {
   name: "Page",
   data() {
     return {}
   },
-  components: {AuthForm, Overlay, Header, Footer}
+  components: {AuthForm, Overlay, Header, Footer, SignUpForm}
 }
+
 </script>
 
 <style lang='scss' scoped>

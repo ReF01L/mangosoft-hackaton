@@ -1,16 +1,20 @@
 <template>
   <div class='Steps'>
-    <div class='step'>1</div>
-    <div class='step'>2</div>
-    <div class='step'>3</div>
-
-
+    <template v-for='n in count'>
+      <div :class='{step:1, active: active+1 > n}'>{{ n }}</div>
+      <div v-if='n !== count' class='delimiter'/>
+    </template>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Steps"
+  name: "Steps",
+  props: {
+    count: Number,
+    active: Number,
+
+  }
 
 }
 </script>
@@ -21,8 +25,25 @@ export default {
 
   display: flex;
 
+  width: 100%;
+  align-items: center;
+
+  .delimiter {
+
+    content: '';
+    display: block;
+    flex: 1 1 auto;
+    width: 111px;
+    height: 1px;
+    background-color: #FFCC33;
+  }
+
   .step {
-    flex: 0;
+
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 48px;
     height: 48px;
     text-align: center;
@@ -34,25 +55,15 @@ export default {
     font-weight: normal;
     font-size: 26px;
     line-height: 48px;
+    width: 48px;
+
+    border-radius: 50%;
 
 
-    &.active{
+    &.active {
       background: #FFCC33;
       color: black;
     }
-
-    &:after {
-      display: block;
-      flex: 1 1 auto;
-      width: 111px;
-      height: 0px;
-      left: 790px;
-      top: 1996px;
-
-      border: 1px solid #FFCC33;
-
-    }
-
 
   }
 

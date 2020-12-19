@@ -1,6 +1,5 @@
 <template>
   <main>
-    <Header/>
     <div class='hero'>
       <div class='hero__banner'>
         <div class='hero__banner-title'>Знания помогают оставаться на шаг впереди.</div>
@@ -177,7 +176,7 @@ main {
   }
 
 
-  . content {
+  .content {
     padding: 0 15em;
 
     .cards {

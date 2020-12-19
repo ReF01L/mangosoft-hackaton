@@ -1,6 +1,6 @@
 <template>
   <div class='AuthForm'>
-    <div class='close' @click='$store.commit("modals/setRegister", false)'/>
+    <div class='close' @click='$store.commit("modals/setAuth", false)'/>
 
 
     <div v-if='step === 0' class='step first'>
@@ -12,10 +12,10 @@
           <TextField label='Пароль' type='password'/>
         </div>
 
-        <div class='button' @click='$store.commit("modals/setRegister", false)'>
+        <div class='button' @click='$store.commit("modals/setAuth", false)'>
           Войти
         </div>
-        <div class='link' @click='step = 2'>
+        <div class='link' @click='$store.commit("modals/setRegister", true)'>
           Регистрация
         </div>
       </div>
@@ -102,6 +102,7 @@ export default {
         display: grid;
         grid-gap: 25px;
         margin-bottom: 45px;
+
 
       }
     }

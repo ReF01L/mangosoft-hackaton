@@ -3,7 +3,7 @@
     <div class="logo">
       <img src="/logo.png" alt="">
     </div>
-    <div class="profile-image">
+    <div @click='$store.commit("modals/setAuth", true)'  class="profile-image">
       <img src="/i_people.png" alt="">
       <span>Войти</span>
     </div>
