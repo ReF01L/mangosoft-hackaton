@@ -18,6 +18,7 @@ use App\Http\Controllers\Api\{AuthController, UserController, SkillController};
 Route::group([
     'prefix' => 'auth'
 ], function() {
+    Route::get('confirm', [AuthController::class, 'confirm']);
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
     Route::get('logout', [AuthController::class, 'logout'])->middleware(['auth.cookie', 'auth.exists']);
