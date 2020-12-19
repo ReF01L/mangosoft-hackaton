@@ -9,7 +9,7 @@
         </label>
       </div>
       <span class="card__interests-show" @click="all_list.length !== 0 ? isActive = !isActive : isActive = false">Показать ещё</span>
-      <div class="card__interests__all" :class="{active: isActive}" >
+      <div class="card__interests__all" :class="{active: isActive}">
         <label v-for="item in all_list" :key="item.id" class="custom-checkbox">
           <input type="checkbox" :checked="checkboxes[item.id].checked"  @click="checkboxes[item.id].checked = true">
           <span>{{item.title}}</span>
@@ -108,6 +108,7 @@
       align-items: flex-end;
       position: relative;
       &__all {
+        min-width: 50%;
         z-index: 1000;
         display: flex;
         flex-direction: column;
