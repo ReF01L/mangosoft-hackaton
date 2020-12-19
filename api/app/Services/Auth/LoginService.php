@@ -51,8 +51,17 @@ class LoginService
 
         $response = json_decode($response->getContent());
 
-        return response()
-            ->json([$response])
-            ->withCookie('_token', $response->access_token, $response->expires_in);
+        $user = self::getUser($request, "{$response->token_type} {$response->access_token}");
+        $role = $user->roles()->pluck('name')->toArray()[0];
+
+        return response('')
+            ->withCookie('_token', $response->access_token, $response->expires_in)
+            ->withCookie('_role', $role, $response->expires_in);
+    }
+
+    private static function getUser(Request $request, $bearerToken)
+    {
+        $request->headers->add(['Authorization' => $bearerToken]);
+        return $request->user('api');
     }
 }
