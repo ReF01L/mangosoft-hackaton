@@ -1,42 +1,43 @@
 <template>
   <div class="info">
     <h2 class="info-title">Романенкова Людмила</h2>
-    <dropdown :options="arrayOfObjects"
-              :selected="object"
-              v-on:updateOption="methodToRunOnSelect"
-              :placeholder="'Select an Item'"
-              :closeOnOutsideClick="true">
-    </dropdown>
+    <el-select v-model="value" :placeholder="options[0].label" class="dropdown" popper-class="tmp">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value">
+      </el-option>
+    </el-select>
   </div>
 </template>
 
 <script>
-  import Dropdown from '../Dropdown'
-
   export default {
     name: "index",
     data() {
       return {
-        arrayOfObjects: [{name: 'Репетитор'}, {name: 'Студент'}],
-        object: {
-          name: 'Студент',
-        }
+        options: [{value: 'Студент', label: 'Студент'}, {value: 'Репетитор', label: 'Репетитор'},
+          {value: 'Представитель организации', label: 'Представитель организации'}],
+        value: ''
       }
     },
-
-    components: {
-      'dropdown': Dropdown,
-    },
-
-    methods: {
-      methodToRunOnSelect(payload) {
-        this.object = payload;
-      }
-    }
   }
 </script>
 
 <style lang="scss" scoped>
+  .tmp {
+    border: none !important;
+  }
+  .el-select-dropdown__item {
+    &.selected {
+      background: rgba(255, 204, 51, 0.4);
+      font-weight: 500;
+      font-size: 14px;
+      color: #000000;
+    }
+  }
+
   .info {
     display: flex;
     flex-direction: column;
@@ -45,6 +46,7 @@
     background: #FDFDFD;
     box-shadow: 0 4px 10px #CBC09F;
     border-radius: 10px;
+
     &-title {
       font-size: 28px;
       font-weight: bold;
