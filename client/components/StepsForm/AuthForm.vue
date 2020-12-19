@@ -4,11 +4,11 @@
 
 
     <div v-if='step === 0' class='step first'>
-      <div class='logo'/>
+      <div class='logo'/>`
 
       <div class='form auth'>
         <div class='fields'>
-          <TextField :required='true' label='Логин'/>
+          <TextField required label='Логин'/>
           <TextField label='Пароль' type='password'/>
         </div>
 

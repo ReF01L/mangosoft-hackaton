@@ -14,18 +14,18 @@
         </div>
 
         <div class='fields'>
-          <TextField :required='true' label='Имя'/>
-          <TextField :required='true' label='Фамилия'/>
-          <TextField :required='true' label='Номер телефона'/>
-          <TextField :required='true' label='E-mail'/>
+          <TextField required label='Имя'/>
+          <TextField required label='Фамилия'/>
+          <TextField required label='Номер телефона'/>
+          <TextField required label='E-mail'/>
         </div>
 
         <div class='title'>
           Введите логин и пароль
         </div>
         <div class='fields'>
-          <TextField :required='true' label='Логин'/>
-          <TextField :required='true' label='Пароль'/>
+          <TextField required label='Логин'/>
+          <TextField required label='Пароль'/>
         </div>
         <label class='checkbox'>
           <input type='checkbox' class='checkbox-input'/>
@@ -54,8 +54,8 @@
           Введите данные организации
         </div>
         <div class='fields'>
-          <TextField :required='true' label='Наименование' placeholder='ООО Школа математики'/>
-          <TextField :required='true' label='Что-то еще' placeholder='Я не знаю что это и сколько такого надо'/>
+          <TextField label='Наименование' placeholder='ООО Школа математики'/>
+          <TextField label='Что-то еще' placeholder='Я не знаю что это и сколько такого надо'/>
         </div>
         <div class='button next' @click='step = 2'>
           Далее
@@ -94,7 +94,7 @@ export default {
 
 <style scoped lang='scss'>
 
-.end-text{
+.end-text {
   font-weight: 500;
   font-size: 24px;
   line-height: 36px;
