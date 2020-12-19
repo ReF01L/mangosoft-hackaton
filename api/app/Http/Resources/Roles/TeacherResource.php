@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\General;
+namespace App\Http\Resources\Roles;
 
-use App\Models\User;
+use App\Http\Resources\General\SkillResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class TeacherResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -27,7 +27,7 @@ class UserResource extends JsonResource
             'company_position' => $this->company_position,
             'company_description' => $this->company_description,
             'description' => $this->description,
-            'skills' => SkillResource::collection($this->skills($request->cookie('_role'))->get()),
+            'skills' => SkillResource::collection($this->skills),
             'roles' => $this->roles()->pluck('name')->toArray()
         ];
     }

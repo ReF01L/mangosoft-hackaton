@@ -65,7 +65,7 @@ class RegisterService
         return response()->json([], Response::HTTP_CREATED);
     }
 
-    private static function saveSkills(string $role, User $user, array $skills)
+    protected static function saveSkills(string $role, User $user, array $skills)
     {
         foreach ($skills as $skill) {
             $data = [

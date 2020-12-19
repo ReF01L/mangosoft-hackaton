@@ -2,7 +2,12 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\{AuthController, UserController, SkillController};
+use App\Http\Controllers\Api\{
+    AuthController,
+    UserController,
+    SkillController,
+    LkController
+};
 
 /*
 |--------------------------------------------------------------------------
@@ -35,4 +40,15 @@ Route::group([
 ], function() {
     Route::get('', [UserController::class, 'index']);
     Route::get('{username}', [UserController::class, 'show']);
+});
+
+Route::group([
+    'prefix' => 'lk',
+    'middleware' => ['auth.cookie', 'auth.exists']
+], function() {
+    Route::get('', [LkController::class, 'index']);
+    Route::get('roles/{role}/set', [LkController::class, 'changeRole']);
+    Route::post('roles/{role}/add', [LkController::class, 'addRole']);
+    Route::get('skills/{id}', [LkController::class, 'updateSkill']);
+    Route::post('', [LkController::class, 'update']);
 });

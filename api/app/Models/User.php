@@ -49,7 +49,8 @@ class User extends Authenticatable
     public function skills($role = self::TEACHER)
     {
         return $this->belongsToMany(Skill::class, 'skill_user', 'user_id', 'skill_id')
-            ->wherePivotIn('role', [$role]);
+            ->wherePivotIn('role', [$role])
+            ->select('skills.*');
     }
 
     public function getNameAttribute()
