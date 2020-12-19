@@ -36,6 +36,7 @@
   .tmp {
     border: none !important;
   }
+
   .el-select-dropdown__item {
     &.selected {
       background: rgba(255, 204, 51, 0.4);
@@ -49,15 +50,30 @@
     margin-bottom: 25px;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
+    align-items: center;
     justify-content: center;
     background: #FDFDFD;
     box-shadow: 0 4px 10px #CBC09F;
     border-radius: 10px;
+    width: 60%;
+    min-width: 450px;
+    @media screen and (max-width: 1260px) {
+      min-width: auto;
+      width: 100%;
+      @media screen and (max-width: 915px) {
+        align-items: center;
+        min-width: 125px;
+      }
+    }
+
     &-title {
       font-size: 28px;
       font-weight: bold;
       padding: 10px 30px 30px 70px;
+      @media screen and (max-width: 915px) {
+        font-size: 16px;
+        padding: 5px;
+      }
     }
   }
 </style>

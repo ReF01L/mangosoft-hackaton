@@ -164,6 +164,7 @@
       justify-content: flex-start;
       margin: 15px auto;
 
+
       &-title {
         font-size: 44px;
         font-weight: 700;

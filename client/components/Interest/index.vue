@@ -71,6 +71,7 @@
       align-items: center;
       user-select: none;
       font-size: 16px;
+      width: 100%;
 
       &::after {
         margin-left: 15px;
@@ -93,11 +94,21 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     background: #FDFDFD;
     box-shadow: 0 4px 10px #CBC09F;
     border-radius: 10px;
-    padding: 20px 20px 20px 150px;
+    padding: 20px 20px 20px;
+    margin-bottom: 25px;
+    width: 60%;
+    min-width: 450px;
+    @media screen and (max-width: 1260px) {
+      min-width: auto;
+      width: 100%;
+      @media screen and (max-width: 915px) {
+        display: none;
+      }
+    }
     &-title {
       font-weight: 700;
       font-size: 28px;

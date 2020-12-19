@@ -4,29 +4,12 @@
       <Header/>
       <div class="content">
         <div class="hero">
-          <div v-if="current_role === '0'" class="recs">
-            <h2 class="hero-title">Вам может понравиться</h2>
-            <div class="recommends">
-              <Rec v-for="(rec, i) in recoms" :key="i"/>
-            </div>
-          </div>
-          <div v-else-if="current_role === '1'" class="rating">
-            <h2 class="rating-title">Рейтинг репетитора</h2>
-            <div class="rating__stars">
-              <span>9.4</span>
-              <el-rate
-                v-model="value2"
-                :colors="colors">
-              </el-rate>
-            </div>
-            <span class="rating-students">25 студентов</span>
-          </div>
+          <Recomendations v-if="current_role === '0'"/>
+          <RatingProfile v-else-if="current_role === '1'" class="rating"/>
           <Courses v-else-if="current_role === '2'"/>
           <div class="right_side">
             <Info/>
-            <div class="interests" v-if="current_role !== '2'">
-              <Interest/>
-            </div>
+            <Interest v-if="current_role !== '2'"/>
             <div v-else class="body">
               <OrganizationInfo/>
             </div>
@@ -43,11 +26,12 @@
   import Header from '../components/Header'
   import Footer from '../components/Footer'
   import Info from '../components/Info'
-  import Rec from '../components/Rec'
+  import Recomendations from '../components/Recomendations'
   import Interest from '../components/Interest'
   import Schedule from '../components/Schedule'
   import Courses from '../components/Courses'
   import OrganizationInfo from "../components/OrganizationInfo";
+  import RatingProfile from "../components/RatingProfile";
 
   import ElementUI from 'element-ui';
   import 'element-ui/lib/theme-chalk/index.css';
@@ -66,26 +50,13 @@
       Header,
       Footer,
       Info,
-      Rec,
+      Recomendations,
       Interest,
       Schedule,
+      RatingProfile,
       Courses
     },
-    data() {
-      return {
-        recoms: [1, 2],
-        value1: null,
-        value2: null,
-        colors: ['#99A9BF', '#F7BA2A', '#FF9900'], // same as { 2: '#99A9BF', 4: { value: '#F7BA2A', excluded: true }, 5: '#FF9900' }
-        count: 0
-      }
-    },
     computed: mapGetters('user', ['current_role']),
-    methods: {
-      load() {
-        this.count += 2
-      }
-    }
   }
 </script>
 
@@ -104,6 +75,9 @@
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
+      @media screen and (max-width: 1260px){
+        justify-content: center;
+      }
 
       & .right_side {
         width: 60%;
@@ -112,55 +86,6 @@
         justify-content: flex-start;
         align-items: flex-end;
         margin-top: 20px;
-      }
-
-      & .rating {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        background: #FDFDFD;
-        box-shadow: 0 4px 10px #CBC09F;
-        border-radius: 10px;
-        padding: 35px;
-
-        &-title {
-          color: #000;
-          font-size: 28px;
-          font-weight: bold;
-        }
-
-        &__stars {
-          display: flex;
-          justify-content: flex-start;
-          align-items: center;
-
-          & span {
-            padding-right: 5px;
-            font-size: 24px;
-            font-weight: 600;
-          }
-        }
-
-        &-students {
-          font-size: 18px;
-          color: #333333;
-        }
-      }
-
-      & .recs {
-        width: 50%;
-        & h2 {
-          font-weight: bold;
-          font-size: 44px;
-        }
-
-        & .recommends {
-          display: flex;
-          justify-content: center;
-          align-items: flex-start;
-          margin: 25px auto;
-        }
       }
     }
   }
