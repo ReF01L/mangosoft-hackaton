@@ -17,7 +17,7 @@
       body: String,
       name: String,
       title: String,
-      rating: Float32Array
+      rating: Number
     },
   }
 </script>

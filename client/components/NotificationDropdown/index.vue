@@ -31,6 +31,7 @@
   border-radius: 10px;
   box-shadow: 0 4px 10px #CBC09F;
   padding: 20px 25px;
+  z-index: 100;
   .cards {
     max-height: 320px;
     overflow-y: auto;
