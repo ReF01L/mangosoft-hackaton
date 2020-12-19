@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\{AuthController};
+use App\Http\Controllers\Api\{AuthController, UserController, SkillController};
 
 /*
 |--------------------------------------------------------------------------
@@ -21,4 +21,17 @@ Route::group([
     Route::post('register', [AuthController::class, 'register']);
     Route::post('login', [AuthController::class, 'login']);
     Route::get('logout', [AuthController::class, 'logout'])->middleware(['auth.cookie', 'auth.exists']);
+});
+
+Route::group([
+    'prefix' => 'skills'
+], function () {
+    Route::get('', [SkillController::class, 'index']);
+});
+
+Route::group([
+    'prefix' => 'users'
+], function() {
+    Route::get('', [UserController::class, 'index']);
+    Route::get('{username}', [UserController::class, 'show']);
 });
