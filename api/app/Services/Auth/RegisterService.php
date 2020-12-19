@@ -4,6 +4,7 @@
 namespace App\Services\Auth;
 
 
+use App\Jobs\ConfirmMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -59,6 +60,8 @@ class RegisterService
             return response()->json([], Response::HTTP_FORBIDDEN);
         }
 
+        ConfirmMail::dispatch($entity, self::generateToken($entity));
+
         return response()->json([], Response::HTTP_CREATED);
     }
 
@@ -72,5 +75,29 @@ class RegisterService
             ];
             DB::table('skill_user')->updateOrInsert($data, $data);
         }
+    }
+
+    private static function generateToken(User $user)
+    {
+        $token = self::getToken($user);
+        while (DB::table('confirm_tokens')->where([
+            'token' => $token
+        ])->exists()) {
+            $token = md5($token);
+        }
+        DB::table('confirm_tokens')->insert([
+            'user_id' => $user->id,
+            'token' => $token,
+            'expired_at' => date('Y-m-d H:i:s', strtotime('+1 hour'))
+        ]);
+        return $token;
+    }
+
+    private static function getToken(User $user)
+    {
+        $first = md5($user->email);
+        $second = md5($user->created_at);
+        $third = md5($user->username);
+        return md5("{$first}{$second}{$third}");
     }
 }
