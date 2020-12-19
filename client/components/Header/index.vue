@@ -28,9 +28,6 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border-radius: 50px;
-    padding: 5px 10em 5px 10px;
-    background: rgba(255, 255, 255, 0.4);
   }
   .profile-image {
     display: flex;
