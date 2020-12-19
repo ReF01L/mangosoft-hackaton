@@ -1,3 +1,7 @@
+export const STUDENT = 'STUDENT' // 0
+export const TUTOR = 'TUTOR'  //1
+export const ORGANIZATION = 'ORGANIZATION' // 2
+
 export default {
   mutations: {
     set_role(state, value) {
@@ -5,7 +9,7 @@ export default {
     },
   },
   state: {
-    role: '1' // 0 - student, 1 - tutor, 2 - organisation
+    role: TUTOR
   },
   getters: {
     current_role(state) {
@@ -13,3 +17,4 @@ export default {
     }
   }
 }
+
