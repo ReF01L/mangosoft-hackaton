@@ -10,6 +10,7 @@
               <Rec v-for="(rec, i) in recoms" :key="i"/>
             </div>
           </div>
+          <
           <div class="right_side">
             <Info class="info"/>
             <div class="interests">
