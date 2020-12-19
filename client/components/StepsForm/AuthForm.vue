@@ -12,7 +12,7 @@
           <TextField label='Пароль' type='password'/>
         </div>
 
-        <div class='button' @click='$store.commit("modals/setAuth", false)'>
+        <div class='rounded-button' @click='$store.commit("modals/setAuth", false)'>
           Войти
         </div>
         <div class='link' @click='$store.commit("modals/setRegister", true)'>
@@ -54,19 +54,7 @@ export default {
   position: relative;
   padding-bottom: 64px;
 
-  .button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #FFCC33;
-    border-radius: 32px;
 
-    font-weight: 500;
-    font-size: 14px;
-    height: 46px;
-    width: 100%;
-    cursor: pointer;
-  }
 
   .link {
 
@@ -111,6 +99,20 @@ export default {
 
     margin-bottom: 31px;
     margin-top: 48px;
+  }
+
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFCC33;
+    border-radius: 32px;
+
+    font-weight: 500;
+    font-size: 14px;
+    height: 46px;
+    width: 100%;
+    cursor: pointer;
   }
 
   .close {
