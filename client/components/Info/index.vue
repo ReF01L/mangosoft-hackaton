@@ -6,7 +6,8 @@
         v-for="item in options"
         :key="item.value"
         :label="item.label"
-        :value="item.value">
+        :value="item.value"
+        :change="setRole()">
       </el-option>
     </el-select>
   </div>
@@ -17,11 +18,17 @@
     name: "index",
     data() {
       return {
-        options: [{value: 'Студент', label: 'Студент'}, {value: 'Репетитор', label: 'Репетитор'},
-          {value: 'Представитель организации', label: 'Представитель организации'}],
-        value: ''
+        options: [{value: '0', label: 'Студент'}, {value: '1', label: 'Репетитор'},
+          {value: '2', label: 'Представитель организации'}],
+        value: '0'
       }
     },
+    methods: {
+      setRole() {
+        console.log(this.value)
+        this.$store.commit('user/set_role', this.value)
+      }
+    }
   }
 </script>
 
@@ -39,6 +46,7 @@
   }
 
   .info {
+    margin-bottom: 25px;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -46,7 +54,6 @@
     background: #FDFDFD;
     box-shadow: 0 4px 10px #CBC09F;
     border-radius: 10px;
-
     &-title {
       font-size: 28px;
       font-weight: bold;
