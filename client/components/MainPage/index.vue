@@ -116,6 +116,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&display=swap');
   main {
     max-width: 100vw;
     overflow: hidden;
@@ -149,6 +150,7 @@
       }
 
       &-title {
+        font-family: 'Montserrat', sans-serif;
         font-size: 70px;
         color: #000;
         word-break: break-word;
@@ -158,6 +160,7 @@
     }
 
     &-btn {
+      font-family: 'Montserrat', sans-serif;
       background: #FAD150;
       color: #000;
       border-radius: 50px;
@@ -189,6 +192,7 @@
         justify-content: space-between;
         align-items: flex-end;
         & span {
+          font-family: 'Montserrat', sans-serif;
           display: block;
           text-align: center;
           color: #2F2E41;
@@ -206,6 +210,7 @@
       justify-content: space-between;
       align-items: flex-start;
       & span {
+        font-family: 'Montserrat', sans-serif;
         color: #2F2E41;
         font-size: 60px;
         font-weight: 400;
@@ -221,8 +226,8 @@
       padding: 25px;
       box-shadow: 0 4px 10px #CBC09F;
       border-radius: 32px;
-      margin: 200px auto;
       &-title {
+        font-family: 'Montserrat', sans-serif;
         font-size: 60px;
         color: #FAD150;
         text-align: right;
@@ -239,6 +244,7 @@
           flex-direction: column;
           justify-content: space-between;
           align-items: center;
+          font-family: 'Montserrat', sans-serif;
 
           & span {
             color: #F5F5F5;
@@ -261,6 +267,7 @@
     }
     .tutors {
       &-title {
+        font-family: 'Montserrat', sans-serif;
         color: #2F2E41;
         font-size: 60px;
       }
@@ -288,6 +295,11 @@
         margin: 12px;
         flex-wrap: wrap;
         &-tutor {
+          transition: 0.6s;
+          &:hover {
+            transform: scale(1.2);
+            transition: 0.6s;
+          }
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -315,6 +327,7 @@
             font-weight: bold;
             font-size: 24px;
             word-break: break-word;
+            font-family: 'Montserrat', sans-serif;
           }
           &__rank {
             display: flex;
@@ -327,6 +340,7 @@
             }
           }
           &-subinfo {
+            font-family: Graphik, sans-serif;
             font-size: 16px;
             color: #000000;
             word-break: break-word;
@@ -341,6 +355,7 @@
       align-items: flex-start;
       margin: 150px auto;
       &-title {
+        font-family: 'Montserrat', sans-serif;
         color: #2F2E41;
         font-size: 60px;
         transform: translateX(25%);
@@ -366,9 +381,11 @@
         left: -10%;
       }
       &-title {
+        width: 60%;
+        font-family: 'Montserrat', sans-serif;
         color: #FAD150;
         font-size: 60px;
-        text-align: right;
+        text-align: left;
       }
       &__block {
         align-self: center;
@@ -391,6 +408,7 @@
     .schedule {
       margin-top: 200px;
       &-title {
+        font-family: 'Montserrat', sans-serif;
         color: #3F3D56;
         font-size: 60px;
         text-align: center;
@@ -410,8 +428,8 @@
       padding: 25px;
       box-shadow: 0 4px 10px #CBC09F;
       border-radius: 32px;
-      margin-top: 200px;
       &-title {
+        font-family: 'Montserrat', sans-serif;
         align-self: flex-start;
         padding: 0 35px;
         color: #FAD150;
@@ -435,6 +453,7 @@
         color: #3F3D56;
         font-size: 60px;
         transform: translateX(-20%);
+        font-family: 'Montserrat', sans-serif;
         & span {
           color: #FFCC33;
           &:last-child {

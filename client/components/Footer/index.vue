@@ -19,6 +19,7 @@
 </script>
 
 <style lang="scss" scoped>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
   footer {
     background: #FFCC33;
     display: flex;
@@ -50,6 +51,7 @@
     }
   }
   .error {
+    font-family: 'Montserrat', sans-serifs;
     align-self: flex-end;
     display: flex;
     justify-content: center;

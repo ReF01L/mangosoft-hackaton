@@ -3,23 +3,23 @@
     <a class="logo" href='/'>
       <img src="/logo.png" alt="">
     </a>
-    <div v-if="!current_token" class="profile">
+    <div v-if="current_token" class="profile">
       <div class="enter" @click='$store.commit("modals/setAuth", true)'>
         <img src="/i_people.png" alt="">
-        <span>Войти</span>
+        <div class="enter-btn">Войти</div>
       </div>
     </div>
     <div v-else class="profile">
       <div class="notification">
         <div class="icon" @click="Active = !Active">
-          <span>{{notifications <= 100 ? notifications : '100+'}}</span>
+          <span>{{UnreadNotificationsCount <= 100 ? UnreadNotificationsCount : '100+'}}</span>
           <img src="/bell.png" alt="">
         </div>
-        <NotificationDropdown class="notification__dropdown" :class="{active: Active}" />
+        <NotificationDropdown class="notification__dropdown" :class="{active: Active && UnreadNotificationsCount !== 0}"/>
       </div>
       <div class="enter" @click='signOut()'>
         <img src="/i_people.png" alt="">
-        <span>Выйти</span>
+        <div class="enter-btn">Выйти</div>
       </div>
     </div>
   </header>
@@ -28,16 +28,19 @@
 <script>
   import NotificationDropdown from '../NotificationDropdown'
   import {mapActions, mapGetters} from "vuex";
+
   export default {
     name: "index",
     components: {NotificationDropdown},
     data() {
       return {
-        notifications: 100,
-        Active: false
+        Active: false,
       }
     },
-    computed: mapGetters('user', ['current_token']),
+    computed: {
+      ...mapGetters('user', ['current_token']),
+      ...mapGetters('cards', ['UnreadNotificationsCount']),
+    },
     methods: mapActions('user', ['signOut'])
   }
 </script>
@@ -49,38 +52,50 @@
       justify-content: flex-start;
       align-items: center;
     }
+
     .profile {
       display: flex;
       justify-content: center;
       align-items: center;
+
       & img {
         border-radius: 50px;
         background-color: #FDFDFD;
         box-shadow: 0 4px 10px #CBC09F;
         padding: 20px;
       }
+
       & > span {
         color: black;
         font-size: 24px;
         margin: 20px;
       }
+
       & .notification {
         &__dropdown {
           opacity: 0;
           transition: 0.3s;
           z-index: -1;
+
           &.active {
             opacity: 1;
             z-index: auto;
           }
         }
+
         margin-right: 3em;
         position: relative;
+
         & .icon {
+          & span {
+            font-family: 'Graphik', sans-serif;
+          }
+
           &:hover {
             cursor: pointer;
           }
         }
+
         & span {
           background: #FFCC33;
           border-radius: 32px;
@@ -89,24 +104,30 @@
           right: -20px;
           padding: 2px 10px;
         }
+
         display: flex;
         justify-content: center;
         align-items: center;
       }
+
       .enter {
         display: flex;
         justify-content: center;
         align-items: center;
+
         &:hover {
           cursor: pointer;
         }
-        & > span {
+
+        &-btn {
+          font-family: 'Graphik', sans-serif;
           color: black;
           font-size: 24px;
           margin: 20px;
         }
       }
     }
+
     display: flex;
     justify-content: space-between;
     align-items: center;
