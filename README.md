@@ -11,6 +11,9 @@
  
  Развёрнутый проект можно просмотреть на `http://localhost`
  
+ Postman:
+ - [MANGOSOFT DOCS](https://www.postman.com/explore/template/15242/mangosoft-hackaton)
+ 
  Дизайн проекта: 
  - [MangoSoft Figma](https://www.figma.com/file/RkIf006nhh8yPIrLpQxOio/Untitled?node-id=556%3A759)
  
