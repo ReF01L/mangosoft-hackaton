@@ -87,7 +87,6 @@ export default {
         })
     },
     async updateProfile(state) {
-
       axios
         .get(process.env.API + 'lk', {withCredentials: true})
         .then(({data}) => {
