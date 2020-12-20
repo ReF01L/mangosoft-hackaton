@@ -11,6 +11,9 @@
  
  Развёрнутый проект можно просмотреть на `http://localhost`
  
+ Дизайн проекта: 
+ - [MangoSoft Figma](https://www.figma.com/file/RkIf006nhh8yPIrLpQxOio/Untitled?node-id=556%3A759)
+ 
  Примечание
  - Если ты используешь Windows, то у тебе могут быть проблемы при деплое, если это так, 
  то закомментируй следующие строчки в api/Dockerfile:

@@ -17,11 +17,6 @@ class SetterService
         'price' => 'required',
     ];
 
-    const SET_LESSON_RULES = [
-        'start' => 'required',
-        'end' => 'required',
-    ];
-
     public static function setSchedule(Request $request)
     {
         $user = $request->user('api');
@@ -61,13 +56,13 @@ class SetterService
         return GetterService::getSchedule($request, $user, $request->cookie('_role'));
     }
 
-    public static function setLesson(Request $request)
+    public static function setLesson(Request $request, string $username)
     {
-        return LessonService::store($request);
+        return LessonService::store($request, $username);
     }
 
-    public static function previewLesson(Request $request)
+    public static function previewLesson(Request $request, string $username)
     {
-        return LessonService::show($request);
+        return LessonService::show($request, $username);
     }
 }
