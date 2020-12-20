@@ -5,6 +5,7 @@ namespace App\Services\Schedule;
 
 
 use App\Models\Cell;
+use App\Services\Payment\LessonService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -62,11 +63,11 @@ class SetterService
 
     public static function setLesson(Request $request)
     {
-        return response()->json([], Response::HTTP_OK);
+        return LessonService::store($request);
     }
 
     public static function previewLesson(Request $request)
     {
-        return response()->json([], Response::HTTP_OK);
+        return LessonService::show($request);
     }
 }
