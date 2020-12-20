@@ -39,7 +39,7 @@
 
     .cards {
       max-height: 320px;
-      overflow-y: auto;
+      overflow-y: scroll;
     }
 
     .read {

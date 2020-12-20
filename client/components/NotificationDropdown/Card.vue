@@ -4,6 +4,7 @@
     <div class="card-content" @click="DialogVisible = true">
       {{description.length > 50 ? (description.slice(0, 50) + '...') : description}}
     </div>
+    <button class="card-remove" @click="readNotification(id)">x</button>
 
     <el-dialog class="dialog" v-if="type === 'mark_teacher'"
                :visible.sync="DialogVisible"
@@ -20,7 +21,7 @@
         <button class="content-btn">Оценить</button>
         <div class="content-miss">Возникло недопонимание?</div>
         <div class="content-write">Напишите нам <span>helper@mail.ru</span>!</div>
-<!--        <button class="content-remove" @click="readNotification">Прочитано</button>-->
+        <button class="content-remove" @click="readNotification(id)">Прочитано</button>
       </div>
     </el-dialog>
     <el-dialog class="dialog" v-if="type === 'success_payment' || type==='failed_payment'"
@@ -34,7 +35,7 @@
         <div class="content-body">{{description}}</div>
         <div class="content-error">Возникло недопонимание?</div>
         <div class="content-error">Напишите нам <span>helper@mail.ru</span></div>
-<!--        <button class="content-remove" @click="readNotification">Прочитано</button>-->
+        <button class="content-remove" @click="readNotification(id)">Прочитано</button>
       </div>
     </el-dialog>
   </div>
@@ -119,10 +120,12 @@
         transition: 0.3s;
       }
     }
+
     &-remove {
       padding: 5px;
       margin: 15px;
     }
+
     &-miss, &-write {
       color: #3F3D56;
       font-size: 24px;
@@ -147,6 +150,7 @@
     border-radius: 10px;
     width: 50vh;
     margin: 10px auto;
+    position: relative;
 
     &:hover {
       cursor: pointer;
@@ -174,6 +178,19 @@
       width: 100%;
       font-size: 14px;
       color: #000000;
+    }
+
+    &-remove {
+      font-family: 'Graphik', sans-serif;
+      position: absolute;
+      top: 2%;
+      right: 2%;
+      opacity: 0.3;
+      transition: 0.3s;
+      &:hover {
+        opacity: 1;
+        transition: 0.3s;
+      }
     }
   }
 </style>

@@ -3,7 +3,7 @@
     <a class="logo" href='/'>
       <img src="/logo.png" alt="">
     </a>
-    <div v-if="current_token" class="profile">
+    <div v-if="!current_token" class="profile">
       <div class="enter" @click='$store.commit("modals/setAuth", true)'>
         <img src="/i_people.png" alt="">
         <div class="enter-btn">Войти</div>
