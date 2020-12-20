@@ -13,4 +13,9 @@ class Schedule extends Model
         'user_id',
         'role',
     ];
+
+    public function cells()
+    {
+        return $this->hasMany(Cell::class, 'schedule_id', 'id');
+    }
 }

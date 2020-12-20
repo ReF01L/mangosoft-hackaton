@@ -44,8 +44,8 @@ Route::group([
 
     Route::get('{username}/schedule', [ScheduleController::class, 'showByUser']);
 
-    Route::post('{username}/schedule/preview', [ScheduleController::class, 'previewLesson']);
-    Route::post('{username}/schedule', [ScheduleController::class, 'setLesson']);
+    Route::post('{username}/schedule/preview', [ScheduleController::class, 'previewLesson'])->middleware(['auth.cookie', 'auth.exists']);
+    Route::post('{username}/schedule', [ScheduleController::class, 'setLesson'])->middleware(['auth.cookie', 'auth.exists']);
 });
 
 Route::group([

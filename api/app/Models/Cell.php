@@ -14,5 +14,6 @@ class Cell extends Model
         'start',
         'end',
         'price',
+        'mode',
     ];
 }
