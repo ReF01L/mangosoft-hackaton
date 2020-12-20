@@ -8,11 +8,11 @@
 
       <div class='form auth'>
         <div class='fields'>
-          <TextField required label='Логин'/>
-          <TextField label='Пароль' type='password'/>
+          <TextField required label='Логин' v-model="user.login"/>
+          <TextField label='Пароль' type='password' v-model="user.password"/>
         </div>
 
-        <div class='button' @click='$store.commit("modals/setAuth", false)'>
+        <div class='button' @click='$store.dispatch("modals/signIn")'>
           Войти
         </div>
         <div class='link' @click='$store.commit("modals/setRegister", true)'>
@@ -20,9 +20,6 @@
         </div>
       </div>
     </div>
-
-
-
   </div>
 
 </template>
@@ -38,6 +35,10 @@ export default {
   data() {
     return {
       step: 0,
+      user: {
+        login: '',
+        password: ''
+      }
     }
   }
 }

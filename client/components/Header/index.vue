@@ -3,7 +3,13 @@
     <a class="logo" href='/'>
       <img src="/logo.png" alt="">
     </a>
-    <div class="profile">
+    <div v-if="!current_token" class="profile">
+      <div class="enter" @click='$store.commit("modals/setAuth", true)'>
+        <img src="/i_people.png" alt="">
+        <span>Войти</span>
+      </div>
+    </div>
+    <div v-else class="profile">
       <div class="notification">
         <div class="icon" @click="Active = !Active">
           <span>{{notifications <= 100 ? notifications : '100+'}}</span>
@@ -11,9 +17,9 @@
         </div>
         <NotificationDropdown class="notification__dropdown" :class="{active: Active}" />
       </div>
-      <div class="enter" @click='$store.commit("modals/setAuth", true)'>
+      <div class="enter" @click='$store.dispatch("modals/signOut")'>
         <img src="/i_people.png" alt="">
-        <span>Войти</span>
+        <span>Выйти</span>
       </div>
     </div>
   </header>
@@ -21,6 +27,7 @@
 
 <script>
   import NotificationDropdown from '../NotificationDropdown'
+  import {mapGetters} from "vuex";
   export default {
     name: "index",
     components: {NotificationDropdown},
@@ -29,7 +36,8 @@
         notifications: 100,
         Active: false
       }
-    }
+    },
+    computed: mapGetters('user', ['current_token']),
   }
 </script>
 

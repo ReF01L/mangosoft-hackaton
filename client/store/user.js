@@ -5,11 +5,15 @@ export default {
     },
   },
   state: {
-    role: '1' // 0 - student, 1 - tutor, 2 - organisation
+    role: '0', // 0 - student, 1 - tutor, 2 - organisation
+    token: ''
   },
   getters: {
     current_role(state) {
       return state.role
+    },
+    current_token(state) {
+      return state.token
     }
   }
 }

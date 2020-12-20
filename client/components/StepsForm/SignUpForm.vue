@@ -3,7 +3,6 @@
   <div class='AuthForm'>
     <div class='close' @click='$store.commit("modals/setRegister", false)'/>
 
-
     <div v-if='step === 0' class='step first'>
       <div class='steps'>
         <Steps :count='3' :active='1'/>
@@ -15,18 +14,18 @@
         </div>
 
         <div class='fields'>
-          <TextField required label='Имя'/>
-          <TextField required label='Фамилия'/>
-          <TextField required label='Номер телефона'/>
-          <TextField required label='E-mail'/>
+          <TextField required label='Имя' v-model="user.name"/>
+          <TextField required label='Фамилия' v-model="user.second_name"/>
+          <TextField required label='Номер телефона' v-model="user.phone"/>
+          <TextField required label='E-mail' v-model="user.email"/>
         </div>
 
         <div class='title'>
           Введите логин и пароль
         </div>
         <div class='fields'>
-          <TextField required label='Логин'/>
-          <TextField required label='Пароль'/>
+          <TextField required label='Логин' v-model="user.login"/>
+          <TextField required label='Пароль' v-model="user.password"/>
         </div>
         <label class='checkbox'>
           <input type='checkbox' class='checkbox-input'/>
@@ -58,7 +57,7 @@
           <TextField label='Наименование' placeholder='ООО Школа математики'/>
           <TextField label='Что-то еще' placeholder='Я не знаю что это и сколько такого надо'/>
         </div>
-        <div class='button next' @click='step = 2'>
+        <div class='button next' @click='lastStep()'>
           Далее
         </div>
       </div>
@@ -81,6 +80,7 @@ import Steps from "./Steps";
 import Logo from "~/components/Logo";
 import TextField from "~/components/StepsForm/TextField";
 import TabsSelector from "~/components/StepsForm/TabsSelector";
+import user from "../../store/user";
 // component is
 export default {
   name: "AuthForm",
@@ -88,6 +88,20 @@ export default {
   data() {
     return {
       step: 0,
+      user: {
+        name: '',
+        second_name: '',
+        phone: '',
+        email: '',
+        login: '',
+        password: '',
+      }
+    }
+  },
+  methods: {
+    lastStep() {
+      this.step = 2;
+      this.$store.dispatch('modals/signUp', user)
     }
   }
 }
