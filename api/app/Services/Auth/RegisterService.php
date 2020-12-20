@@ -23,7 +23,7 @@ class RegisterService
             'username' => 'required|string|unique:users,username|max:255',
             'email' => 'required|string|email|unique:users,email|max:255',
             'password' => 'required|string|min:6|max:255',
-            'skills' => 'required|array',
+            'skills' => 'nullable|array',
         ],
         'student' => [
 
@@ -55,7 +55,7 @@ class RegisterService
             $entity = User::create($validator->validated());
             $entity->assignRole(Role::where(['name' => $role])->first());
             $entity->save();
-            self::saveSkills($role, $entity, $request->get('skills'));
+            self::saveSkills($role, $entity, $request->get('skills', []));
         } catch (ValidationException $e) {
             return response()->json([], Response::HTTP_FORBIDDEN);
         }
