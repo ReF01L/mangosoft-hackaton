@@ -6,7 +6,7 @@
     <div v-if='!profile' class='profile'>
       <div class='enter' @click='$store.commit("modals/setAuth", true)'>
         <img src='/i_people.png' alt=''>
-        <div class="enter-btn">Войти</div>
+        <span>Войти</span>
       </div>
     </div>
     <div v-else class='profile'>
