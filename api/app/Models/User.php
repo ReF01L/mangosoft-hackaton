@@ -15,19 +15,48 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens, HasRoles;
 
     protected $fillable = [
-        'name',
         'email',
+        'phone',
+        'first_name',
+        'second_name',
+        'name',
+        'username',
+        'company_name',
+        'company_position',
+        'company_description',
+        'active',
         'password',
+
+        'description',
     ];
 
     protected $hidden = [
         'password',
-        'remember_token',
     ];
 
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    const STUDENT = 'student';
+    const TEACHER = 'teacher';
+    const COMPANY = 'company';
+
+    public function findForPassport($username)
+    {
+        return $this->where([
+            'username' => $username,
+            'active' => true,
+        ])->first();
+    }
+
+    public function skills($role = self::TEACHER)
+    {
+        return $this->belongsToMany(Skill::class, 'skill_user', 'user_id', 'skill_id')
+            ->wherePivotIn('role', [$role])
+            ->select('skills.*');
+    }
+
+    public function getNameAttribute()
+    {
+        return "{$this->first_name} {$this->second_name[0]}";
+    }
 
     public function setPasswordAttribute($value)
     {
