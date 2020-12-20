@@ -12,6 +12,7 @@ use App\Services\OrderServices\Commands\PaymentService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Log;
 
 class LessonService
 {
@@ -75,6 +76,32 @@ class LessonService
             ->where('end', '>=', $request->get('end'))
             ->update(['mode' => Cell::BLOCKED]);
 
-        $response = [];
+        try {
+            $entity = Lesson::create([
+                'start' => $request->get('start'),
+                'end' => $request->get('end'),
+                'price' => $request->get('price'),
+                'cell_id' => $cells->first()->id,
+                'student_id' => $user->id,
+                'teacher_id' => $teacher->id,
+            ]);
+            return self::generatePaymentResponse($entity);
+        } catch (\Exception $exception) {
+            Log::error($exception->getMessage());
+            return response()->json([], Response::HTTP_FORBIDDEN);
+        }
+    }
+
+    public static function generatePaymentResponse(Lesson $lesson)
+    {
+        $paymentClient = new DefaultService();
+        $data = (array) $paymentClient->register($lesson);
+        if (in_array('orderId', array_keys($data))) {
+            $lesson->update([
+                'payment_id' => $data['orderId'],
+                'expired_at' => date('Y-m-d H:i', strtotime('+1 hour'))
+            ]);
+        }
+        return response()->json($data, Response::HTTP_CREATED);
     }
 }
