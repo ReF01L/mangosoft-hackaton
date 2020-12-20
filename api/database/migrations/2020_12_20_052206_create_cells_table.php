@@ -16,6 +16,7 @@ class CreateCellsTable extends Migration
         Schema::create('cells', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('mode')->default('free');
             $table->unsignedBigInteger('schedule_id');
             $table->foreign('schedule_id')->references('id')->on('schedules')->cascadeOnDelete();
             $table->timestamp('start');
