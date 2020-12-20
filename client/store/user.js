@@ -21,7 +21,8 @@ export default {
     token: '',
     role: STUDENT,
     skills: [],
-    error: ''
+    error: '',
+    profile: {}
   },
   getters: {
     current_role(state) {
@@ -36,42 +37,53 @@ export default {
   },
   actions: {
     async signIn(state, user) {
-      axios
+      await axios
         .post(process.env.API + 'auth/login', {
           username: user.login,
           password: user.password
-        })
+        }, {withCredentials: true})
         .then(res => {
-          this.$store.commit("modals/setAuth", false)
+          // this.$store.commit("modals/setAuth", false)
           state.error = ''
         })
         .catch((e) => {
+          console.log(e)
           alert(JSON.stringify(e.response?.data?.errors))
+          throw ''
         })
     },
     async signUp(state, user) {
-      axios
-        .post(process.env.API + 'register', {
-          email: user.email,
-          password: user.password,
+      await axios
+        .post(process.env.API + 'auth/register', {
+          ...user,
           skills: state["modals/skills"],
-          role: 'student'
-        })
+        }, {withCredentials: true})
         .then(res => {
           state.error = ''
         })
         .catch(e => {
           alert(JSON.stringify(e.response?.data?.errors))
+          throw 'error'
         })
     },
     async signOut(state) {
       axios
-        .get(process.env.API + 'auth/logout')
+        .get(process.env.API + 'auth/logout', {withCredentials: true})
         .then(res => {
           state.token = ''
         })
         .catch(e => {
           alert(JSON.stringify(e.response?.data?.errors))
+        })
+    },
+    async updateProfile(state) {
+      axios
+        .get(process.env.API + 'lk', {withCredentials: true})
+        .then(({data}) => {
+          state.profile = data
+        })
+        .catch(e => {
+          //alert(JSON.stringify(e.response?.data?.errors))
         })
     }
   }

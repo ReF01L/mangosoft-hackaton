@@ -9,22 +9,23 @@
       </div>
       <div class='role-buttons'>
 
-        <div :class='{active: user.role === "student" , "role-button": true}'>
+        <!-- todo replace with array-->
+        <div @click='user.role = "student"' :class='{active: user.role === "student" , "role-button": true}'>
           Студент
         </div>
-        <div :class='{active: user.role === "company" , "role-button": true}'>
+        <div @click='user.role = "company"' :class='{active: user.role === "company" , "role-button": true}'>
           Представитель организации
         </div>
-        <div :class='{active: user.role === "teacher" , "role-button": true}'>
+        <div @click='user.role = "teacher"' :class='{active: user.role === "teacher" , "role-button": true}'>
           Репетитор
         </div>
       </div>
 
-
-      <div class='button next' @click='step = 0'>
-        Далее
+      <div class='action-buttons'>
+        <div class='button next' @click='step = 0'>
+          Далее
+        </div>
       </div>
-
     </div>
 
 
@@ -40,7 +41,7 @@
         </div>
 
         <div class='fields'>
-          <TextField required label='Имя' v-model='user.name'/>
+          <TextField required label='Имя' v-model='user.first_name'/>
           <TextField required label='Фамилия' v-model='user.second_name'/>
           <TextField required label='Номер телефона' v-model='user.phone'/>
           <TextField required label='E-mail' v-model='user.email'/>
@@ -50,7 +51,7 @@
           Введите логин и пароль
         </div>
         <div class='fields'>
-          <TextField required label='Логин' v-model='user.login'/>
+          <TextField required label='Логин' v-model='user.username'/>
           <TextField required label='Пароль' v-model='user.password'/>
         </div>
         <label class='checkbox'>
@@ -59,8 +60,13 @@
           <span>Я согласен на <a>обработку персональных данных</a></span>
         </label>
 
-        <div class='button next' @click='step = 1'>
-          Далее
+        <div class='action-buttons'>
+          <div class='button back' @click='step = -1'>
+            Назад
+          </div>
+          <div class='button next' @click='step = 1'>
+            Далее
+          </div>
         </div>
       </div>
     </div>
@@ -77,15 +83,24 @@
           Укажите сферы интересов
         </div>
         <TabsSelector/>
-        <div class='title'>
-          Введите данные организации
-        </div>
-        <div class='fields'>
-          <TextField label='Наименование' placeholder='ООО Школа математики'/>
-          <TextField label='Что-то еще' placeholder='Я не знаю что это и сколько такого надо'/>
-        </div>
-        <div class='button next' @click='lastStep()'>
-          Далее
+
+        <template v-if='user.role === "company"'>
+          <div class='title'>
+            Введите данные организации
+          </div>
+          <div class='fields'>
+            <TextField v-model='user.company_name' label='Наименование' placeholder='ООО Школа математики'/>
+            <TextField v-model='user.company_position' label='Что-то еще' placeholder='Я не знаю что это и сколько такого надо'/>
+          </div>
+        </template>
+
+        <div class='action-buttons'>
+          <div class='button back' @click='step = 0'>
+            Назад
+          </div>
+          <div class='button next' @click='lastStep()'>
+            Далее
+          </div>
         </div>
       </div>
     </div>
@@ -118,19 +133,24 @@ export default {
       step: -1,
       user: {
         role: 'student',
-        name: '',
+        first_name: '',
         second_name: '',
         phone: '',
         email: '',
-        login: '',
+        username: '',
         password: '',
+
+        company_name: '',
+        company_position: '',
+        company_description: '',
       }
     }
   },
   methods: {
     lastStep() {
-      this.step = 2;
-      this.signUp(this.user);
+      this.signUp(this.user)
+        .then(() => this.step = 2)
+        .catch(() => {})
     },
     ...mapActions('user', ['signUp'])
   },
@@ -140,12 +160,20 @@ export default {
 
 <style scoped lang='scss'>
 
+.action-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 64px;
+}
 
 .role-buttons {
   display: grid;
   grid-gap: 40px;
 
   .role-button {
+    cursor: pointer;
     margin: 0 auto;
     height: 82px;
     width: 100%;
@@ -161,9 +189,9 @@ export default {
     font-size: 24px;
     line-height: 82px;
 
-   // display: flex;
-   // align-items: center;
-   // text-align: center;
+    // display: flex;
+    // align-items: center;
+    // text-align: center;
 
     color: #333333;
 
@@ -273,7 +301,21 @@ export default {
       width: fit-content;
       min-width: 180px;
       justify-self: flex-end;
-      margin-left: auto;
+      //margin-left: auto;
+    }
+
+    &.back {
+      background: transparent;
+      border-radius: 10px;
+      font-size: 14px;
+      line-height: 14px;
+      width: fit-content;
+      min-width: 180px;
+      justify-self: flex-end;
+      box-sizing: border-box;
+
+      border: 1px solid #FFCC33;
+      color: #FFCC33;
     }
   }
 
@@ -295,15 +337,16 @@ export default {
 
     &.first {
     }
-    &.zero{
+
+    &.zero {
       padding: 0 35px;
       width: 100%;
 
-      .role-buttons{
+      .role-buttons {
         margin-bottom: 64px;
       }
 
-      .title{
+      .title {
         text-align: start;
         width: 100%;
       }

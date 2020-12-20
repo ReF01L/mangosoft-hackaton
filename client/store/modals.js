@@ -1,6 +1,7 @@
 export const state = () => ({
   register: false,
-  auth: false
+  auth: false,
+  skills: [],
 })
 
 

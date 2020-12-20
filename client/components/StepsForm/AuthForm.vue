@@ -43,12 +43,15 @@ export default {
   },
   methods: {
     send() {
-      if (this.user.login !== '' && this.user.password !== '')
-        this.signIn(this.user)
-      else
+      this.signIn(this.user).then(() => {
+        this.$store.commit('modals/setAuth', false)
+
+        this.updateProfile()
+      }).catch(() => {
         this.$store.commit('user/setError', 'Заполните все поля!')
+      })
     },
-    ...mapActions('user', ['signIn'])
+    ...mapActions('user', ['signIn', 'updateProfile'])
   },
   computed: mapGetters('user', ['sendError'])
 }
