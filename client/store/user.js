@@ -39,11 +39,37 @@ export default {
         })
         .then(res => {
           this.$store.commit("modals/setAuth", false)
+          state.error = ''
         })
         .catch(err => {
           alert("Отсутсвует соединение с сервером: \n" + err)
         })
     },
+    async signUp(state, user) {
+      axios
+        .post(process.env.API + '', {
+          email: user.email,
+          password: user.password,
+          skills: state["modals/skills"],
+          role: 'student'
+        })
+        .then(res => {
+          state.error = ''
+        })
+        .catch(err => {
+          alert("Отсутсвует соединение с сервером: \n" + error)
+        })
+    },
+    async signOut(state) {
+      axios
+        .get(process.env.API + '/auth/logout')
+        .then(res => {
+          state.token = ''
+        })
+        .catch(err => {
+          alert("Отсутствует соединение с сервером");
+        })
+    }
   }
 }
 
