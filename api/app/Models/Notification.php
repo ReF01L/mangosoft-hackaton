@@ -13,8 +13,12 @@ class Notification extends Model
         'title',
         'description',
         'user_id',
-        'read'
+        'read',
+        'type',
     ];
+
+    const PAYMENT = 'payment';
+    const MARK_TEACHER = 'mark_teacher';
 
     public function user()
     {
