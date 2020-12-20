@@ -39,13 +39,13 @@ class ScheduleController extends Controller
         return SetterService::deleteSchedule($request, $id);
     }
 
-    public static function setLesson(Request $request)
+    public static function setLesson(Request $request, string $username)
     {
-        return SetterService::setLesson($request);
+        return SetterService::setLesson($request, $username);
     }
 
-    public static function previewLesson(Request $request)
+    public static function previewLesson(Request $request, string $username)
     {
-        return SetterService::previewLesson($request);
+        return SetterService::previewLesson($request, $username);
     }
 }
