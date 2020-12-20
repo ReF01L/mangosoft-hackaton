@@ -1,10 +1,12 @@
 <template>
   <div class='wrapper'>
     <div class='title'>
-      <h2 class='title-title'>Мое расписание</h2>
+      <h2 class='title-title'>{{ title || 'Мое расписание' }}</h2>
     </div>
-    <TutorCalendar/>
-<!--    <StudentCalendar/>-->
+    <slot/>
+
+    <!--    <TutorCalendar/>-->
+    <!--    <StudentCalendar/>-->
   </div>
 </template>
 
@@ -19,6 +21,9 @@ export default {
   name: "index",
   components: {StudentCalendar, TutorCalendar, Grid},
   computed: mapGetters('user', ['current_role']),
+  props: [
+    'title'
+  ],
   data() {
     return {
       time1: null,

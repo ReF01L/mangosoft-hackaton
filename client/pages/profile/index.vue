@@ -13,7 +13,10 @@
           </div>
         </div>
       </div>
-      <Schedule v-if="current_role !== 'ORGANIZATION'"/>
+      <Schedule v-if="current_role !== 'ORGANIZATION'">
+        <TutorCalendar v-if="current_role !== 'TUTOR'"/>
+        <ViewCalendar v-if="current_role !== 'STUDENT'"/>
+      </Schedule>
     </div>
   </Page>
 </template>
@@ -37,6 +40,8 @@ import Vue from 'vue'
 import Page from "~/components/Page";
 
 import {mapGetters} from 'vuex'
+import TutorCalendar from "@/components/Calendar/TutorCalendar";
+import ViewCalendar from "@/components/Calendar/ViewCalendar";
 
 Vue.use(Element, {locale})
 Vue.use(ElementUI)
@@ -53,7 +58,10 @@ export default {
     Schedule,
     Page,
     RatingProfile,
-    Courses
+    Courses,
+    TutorCalendar,
+    ViewCalendar,
+
   },
   computed: mapGetters('user', ['current_role']),
 }

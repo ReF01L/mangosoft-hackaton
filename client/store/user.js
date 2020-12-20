@@ -4,6 +4,10 @@ export const STUDENT = 'STUDENT' // 0
 export const TUTOR = 'TUTOR'  //1
 export const ORGANIZATION = 'ORGANIZATION' // 2
 
+function convertErrors(errors) {
+  return Object.fromEntries(Object.entries(errors || {}).map(([name, value]) => [name, value[0]]));
+}
+
 export default {
   mutations: {
     set_role(state, value) {
@@ -33,7 +37,7 @@ export default {
   actions: {
     async signIn(state, user) {
       axios
-        .post(process.env.API + '/auth/login', {
+        .post(process.env.API + 'auth/login', {
           username: user.login,
           password: user.password
         })
@@ -41,13 +45,13 @@ export default {
           this.$store.commit("modals/setAuth", false)
           state.error = ''
         })
-        .catch(err => {
-          alert("Отсутсвует соединение с сервером: \n" + err)
+        .catch((e) => {
+          alert(JSON.stringify(e.response?.data?.errors))
         })
     },
     async signUp(state, user) {
       axios
-        .post(process.env.API + '', {
+        .post(process.env.API + 'register', {
           email: user.email,
           password: user.password,
           skills: state["modals/skills"],
@@ -56,18 +60,18 @@ export default {
         .then(res => {
           state.error = ''
         })
-        .catch(err => {
-          alert("Отсутсвует соединение с сервером: \n" + error)
+        .catch(e => {
+          alert(JSON.stringify(e.response?.data?.errors))
         })
     },
     async signOut(state) {
       axios
-        .get(process.env.API + '/auth/logout')
+        .get(process.env.API + 'auth/logout')
         .then(res => {
           state.token = ''
         })
-        .catch(err => {
-          alert("Отсутствует соединение с сервером");
+        .catch(e => {
+          alert(JSON.stringify(e.response?.data?.errors))
         })
     }
   }
