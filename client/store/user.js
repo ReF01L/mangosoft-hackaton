@@ -1,4 +1,5 @@
 import axios from "axios";
+import apiCall from "@/scripts/api";
 
 export const STUDENT = 'STUDENT' // 0
 export const TUTOR = 'TUTOR'  //1
@@ -15,6 +16,9 @@ export default {
     },
     setError(state, value) {
       state.error = value
+    },
+    setProfile(state, value) {
+      state.profile = value
     }
   },
   state: {
@@ -22,7 +26,7 @@ export default {
     role: STUDENT,
     skills: [],
     error: '',
-    profile: {}
+    profile: null
   },
   getters: {
     current_role(state) {
@@ -31,19 +35,25 @@ export default {
     current_token(state) {
       return state.token
     },
+    profile(state) {
+      return state.profile
+    },
     sendError(state) {
       return state.error
     }
   },
   actions: {
     async signIn(state, user) {
-      await axios
-        .post(process.env.API + 'auth/login', {
+
+      await apiCall({
+        url: 'auth/login',
+        data: {
           username: user.login,
           password: user.password
-        }, {withCredentials: true})
+        },
+        method: 'post',
+      })
         .then(res => {
-          // this.$store.commit("modals/setAuth", false)
           state.error = ''
         })
         .catch((e) => {
@@ -77,13 +87,14 @@ export default {
         })
     },
     async updateProfile(state) {
+
       axios
         .get(process.env.API + 'lk', {withCredentials: true})
         .then(({data}) => {
-          state.profile = data
+          state.commit('setProfile', data)
         })
         .catch(e => {
-          //alert(JSON.stringify(e.response?.data?.errors))
+          state.commit('setProfile', null)
         })
     }
   }
