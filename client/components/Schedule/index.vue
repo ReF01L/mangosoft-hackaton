@@ -4,6 +4,7 @@
       <h2 class='title-title'>Мое расписание</h2>
     </div>
     <TutorCalendar/>
+<!--    <StudentCalendar/>-->
   </div>
 </template>
 
@@ -11,10 +12,13 @@
 
 import Grid from "./Grid";
 import TutorCalendar from "@/components/Calendar/TutorCalendar";
+import {mapGetters} from "vuex";
+import StudentCalendar from "@/components/Calendar/StudentCalendar";
 
 export default {
   name: "index",
-  components: {TutorCalendar, Grid},
+  components: {StudentCalendar, TutorCalendar, Grid},
+  computed: mapGetters('user', ['current_role']),
   data() {
     return {
       time1: null,

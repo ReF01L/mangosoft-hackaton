@@ -19,15 +19,15 @@
 </template>
 
 <script>
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Info from '../components/Info'
-import Recomendations from '../components/Recomendations'
-import Interest from '../components/Interest'
-import Schedule from '../components/Schedule'
-import Courses from '../components/Courses'
-import OrganizationInfo from "../components/OrganizationInfo";
-import RatingProfile from "../components/RatingProfile";
+import Header from '~/components/Header'
+import Footer from '~/components/Footer'
+import Info from '~/components/Info'
+import Recomendations from '~/components/Recomendations'
+import Interest from '~/components/Interest'
+import Schedule from '~/components/Schedule'
+import Courses from '~/components/Courses'
+import OrganizationInfo from "~/components/OrganizationInfo";
+import RatingProfile from "~/components/RatingProfile";
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
