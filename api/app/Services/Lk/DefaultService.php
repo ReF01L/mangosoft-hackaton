@@ -28,19 +28,20 @@ class DefaultService
     {
         $user = $request->user('api');
 
-        return response()->json([
-            'data' => new UserResource($user),
+        $data = [
+            'data' => (array) new UserResource($user),
             'skills' => SkillResource::collection(Skill::all()),
             'recommends' => TeacherResource::collection(
                 User::with(['skills' => function ($query) use ($user) {
                     $query->whereIn('skills.id', $user->skills()->pluck('id')->toArray());
                 }])
-                ->whereHas('skills')
-                ->where('users.id', '!=', $user->id)
-                ->role('teacher')
-                ->get()
+                    ->whereHas('skills')
+                    ->where('users.id', '!=', $user->id)
+                    ->role('teacher')
+                    ->get()
             )
-        ], Response::HTTP_OK);
+        ];
+        return response()->json($data);
     }
 
     public static function changeRole(Request $request, string $role)

@@ -52,7 +52,7 @@
         </div>
         <div class='fields'>
           <TextField required label='Логин' v-model='user.username'/>
-          <TextField required label='Пароль' v-model='user.password'/>
+          <TextField required label='Пароль' type='password' v-model='user.password'/>
         </div>
         <label class='checkbox'>
           <input type='checkbox' class='checkbox-input'/>
