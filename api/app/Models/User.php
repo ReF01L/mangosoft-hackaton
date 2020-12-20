@@ -46,6 +46,24 @@ class User extends Authenticatable
         ])->first();
     }
 
+    public function getSchedule($role = User::TEACHER)
+    {
+        $schedule = $this->schedules($role)->first();
+        if (!$schedule) {
+            $schedule = Schedule::create([
+                'user_id' => $this->id,
+                'role' => $role
+            ]);
+        }
+        return $schedule;
+    }
+
+    public function schedules($role = User::TEACHER)
+    {
+        return $this->hasMany(Schedule::class, 'user_id', 'id')
+            ->where(['role' => $role]);
+    }
+
     public function skills($role = self::TEACHER)
     {
         return $this->belongsToMany(Skill::class, 'skill_user', 'user_id', 'skill_id')
