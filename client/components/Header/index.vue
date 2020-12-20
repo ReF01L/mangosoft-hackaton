@@ -17,7 +17,7 @@
         </div>
         <NotificationDropdown class="notification__dropdown" :class="{active: Active}" />
       </div>
-      <div class="enter" @click='$store.dispatch("modals/signOut")'>
+      <div class="enter" @click='signOut()'>
         <img src="/i_people.png" alt="">
         <span>Выйти</span>
       </div>
@@ -27,7 +27,7 @@
 
 <script>
   import NotificationDropdown from '../NotificationDropdown'
-  import {mapGetters} from "vuex";
+  import {mapActions, mapGetters} from "vuex";
   export default {
     name: "index",
     components: {NotificationDropdown},
@@ -38,6 +38,7 @@
       }
     },
     computed: mapGetters('user', ['current_token']),
+    methods: mapActions('user', ['signOut'])
   }
 </script>
 
