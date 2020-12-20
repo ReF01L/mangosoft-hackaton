@@ -7,5 +7,4 @@
 <style lang='scss'>
 @import "styles/globals";
 
-
 </style>

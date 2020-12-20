@@ -1,26 +1,28 @@
 <template>
   <header>
-    <a class="logo" href='/'>
-      <img src="/logo.png" alt="">
+    <a class='logo' href='/'>
+      <img src='/logo.png' alt=''>
     </a>
-    <div v-if="!current_token" class="profile">
-      <div class="enter" @click='$store.commit("modals/setAuth", true)'>
-        <img src="/i_people.png" alt="">
+    <div v-if='!profile' class='profile'>
+      <div class='enter' @click='$store.commit("modals/setAuth", true)'>
+        <img src='/i_people.png' alt=''>
         <div class="enter-btn">Войти</div>
       </div>
     </div>
-    <div v-else class="profile">
-      <div class="notification">
-        <div class="icon" @click="Active = !Active">
-          <span>{{UnreadNotificationsCount <= 100 ? UnreadNotificationsCount : '100+'}}</span>
-          <img src="/bell.png" alt="">
+    <div v-else class='profile'>
+      <div class='notification'>
+        <div class='icon' @click='Active = !Active'>
+          <span>{{ notifications <= 100 ? notifications : '100+' }}</span>
+          <img src='/bell.png' alt=''>
         </div>
-        <NotificationDropdown class="notification__dropdown" :class="{active: Active && UnreadNotificationsCount !== 0}"/>
+        <NotificationDropdown class='notification__dropdown' :class='{active: Active}'/>
       </div>
-      <div class="enter" @click='signOut()'>
-        <img src="/i_people.png" alt="">
-        <div class="enter-btn">Выйти</div>
-      </div>
+      <a class='enter' href='/profile'>
+        <img src='/i_people.png' alt=''>
+        <div class='enter-btn'></div>
+
+        <span>{{ name }}</span>
+      </a>
     </div>
   </header>
 </template>
@@ -34,18 +36,22 @@
     components: {NotificationDropdown},
     data() {
       return {
-        Active: false,
+        notifications: 100,
+        Active: false
       }
     },
     computed: {
-      ...mapGetters('user', ['current_token']),
+      name() {
+        return this?.profile?.first_name || 'Профиль'
+      },
+      ...mapGetters('user', ['current_token', 'profile']),
       ...mapGetters('cards', ['UnreadNotificationsCount']),
     },
     methods: mapActions('user', ['signOut'])
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
   header {
     .logo {
       display: flex;
@@ -87,10 +93,6 @@
         position: relative;
 
         & .icon {
-          & span {
-            font-family: 'Graphik', sans-serif;
-          }
-
           &:hover {
             cursor: pointer;
           }
@@ -119,13 +121,13 @@
           cursor: pointer;
         }
 
-        &-btn {
-          font-family: 'Graphik', sans-serif;
+        & > span {
           color: black;
           font-size: 24px;
           margin: 20px;
         }
       }
+
     }
 
     display: flex;
