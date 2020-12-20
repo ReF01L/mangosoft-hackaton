@@ -16,4 +16,8 @@ class Cell extends Model
         'price',
         'mode',
     ];
+
+    const FREE = 'free';
+    const BLOCKED = 'blocked';
+    const ACTIVE = 'active';
 }
