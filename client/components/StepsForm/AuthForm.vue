@@ -3,16 +3,29 @@
     <div class='close' @click='$store.commit("modals/setAuth", false)'/>
 
 
+<<<<<<< HEAD
     <div  class='step first'>
       <div class='logo'/>
       <span class="error">{{sendError}}</span>
+=======
+    <div class='step first'>
+      <div class='logo'/>
+      `
+
+>>>>>>> 1fe1ff72fb8bddafc50a221da2c01ed56ab01fda
       <div class='form auth'>
         <div class='fields'>
-          <TextField required label='Логин' v-model="user.login"/>
-          <TextField label='Пароль' type='password' v-model="user.password"/>
+          <TextField required label='Логин' v-model='user.login'/>
+          <TextField label='Пароль' type='password' v-model='user.password'/>
         </div>
 
+<<<<<<< HEAD
         <div class='button' @click='send()'>
+=======
+
+        <div class='button' @click='$store.dispatch("modals/signIn")'>
+
+>>>>>>> 1fe1ff72fb8bddafc50a221da2c01ed56ab01fda
           Войти
         </div>
         <div class='link' @click='$store.commit("modals/setRegister", true)'>
@@ -66,6 +79,7 @@ export default {
   position: relative;
   padding-bottom: 64px;
 
+<<<<<<< HEAD
   .error {
     color: #ff4500;
     padding: 0 0 15px;
@@ -83,6 +97,9 @@ export default {
     width: 100%;
     cursor: pointer;
   }
+=======
+
+>>>>>>> 1fe1ff72fb8bddafc50a221da2c01ed56ab01fda
   .link {
 
     font-weight: 500;
@@ -123,6 +140,24 @@ export default {
     margin-bottom: 31px;
     margin-top: 48px;
   }
+<<<<<<< HEAD
+=======
+
+  .button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFCC33;
+    border-radius: 32px;
+
+    font-weight: 500;
+    font-size: 14px;
+    height: 46px;
+    width: 100%;
+    cursor: pointer;
+  }
+
+>>>>>>> 1fe1ff72fb8bddafc50a221da2c01ed56ab01fda
   .close {
     position: absolute;
     width: 17px;

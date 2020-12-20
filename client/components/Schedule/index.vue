@@ -2,45 +2,19 @@
   <div class='wrapper'>
     <div class='title'>
       <h2 class='title-title'>Мое расписание</h2>
-      <div class='title__setter'>
-        <div class='title__setter__date'>
-          <span class='title__setter__date-title'>Введите дату</span>
-          <el-date-picker class='title__setter__date-picker'
-                          v-model='date'
-                          type='date'
-                          placeholder='dd/mm/yyyy'
-                          :picker-options='pickerOptions'>
-          </el-date-picker>
-        </div>
-        <div class='title__setter__time'>
-          <span class='title__setter__time-title'>Введите время</span>
-          <el-time-picker class='title__setter__time-picker'
-                          is-range
-                          arrow-control
-                          v-model='time'
-                          range-separator='To'
-                          start-placeholder='Start time'
-                          end-placeholder='End time'>
-          </el-time-picker>
-        </div>
-        <button class='title__setter-add'>Добавить</button>
-      </div>
-      <el-carousel indicator-position='none' height='1400px' :autoplay=false>
-        <el-carousel-item v-for='item in 4' :key='item'>
-          <Grid/>
-        </el-carousel-item>
-      </el-carousel>
     </div>
+    <TutorCalendar/>
   </div>
 </template>
 
 <script>
 
 import Grid from "./Grid";
+import TutorCalendar from "@/components/Calendar/TutorCalendar";
 
 export default {
   name: "index",
-  components: {Grid},
+  components: {TutorCalendar, Grid},
   data() {
     return {
       time1: null,

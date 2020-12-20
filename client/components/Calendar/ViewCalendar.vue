@@ -41,5 +41,8 @@ export default {
 </script>
 
 <style scoped>
+.TutorCalendar {
+  width: 100%;
+}
 
 </style>

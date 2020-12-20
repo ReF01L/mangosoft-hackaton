@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Services\Auth\ConfirmService;
 use App\Services\Auth\LoginService;
 use App\Services\Auth\LogoutService;
 use App\Services\Auth\RegisterService;
@@ -23,5 +24,10 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         return LogoutService::logout($request);
+    }
+
+    public function confirm(Request $request)
+    {
+        return ConfirmService::confirm($request);
     }
 }

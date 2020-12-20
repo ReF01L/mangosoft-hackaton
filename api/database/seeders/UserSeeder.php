@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
         $user1 = User::create([
             'first_name' => 'User',
             'second_name' => 'Test',
+            'username' => 'user1',
             'phone' => '+79995552020',
             'email' => 'example1@gmail.com',
             'password' => 'password',
@@ -27,7 +28,8 @@ class UserSeeder extends Seeder
         $user2 = User::create([
             'first_name' => 'User',
             'second_name' => 'Test',
-            'phone' => '+79995552020',
+            'username' => 'user2',
+            'phone' => '+79995552021',
             'email' => 'example2@gmail.com',
             'password' => 'password',
         ]);
@@ -35,7 +37,8 @@ class UserSeeder extends Seeder
         $user3 = User::create([
             'first_name' => 'User',
             'second_name' => 'Test',
-            'phone' => '+79995552020',
+            'username' => 'user3',
+            'phone' => '+79995552022',
             'email' => 'example3@gmail.com',
             'password' => 'password',
         ]);
