@@ -22,14 +22,15 @@
           {value: '2', label: 'Представитель организации'}],
         value: '0',
         label: 'Студент',
-        isActive: false
+        isActive: false,
+        roles: ['STUDENT', 'TUTOR', 'ORGANIZATION']
       }
     },
     methods: {
       setRole(value) {
         this.value = value
         this.label = this.options[this.value].label;
-        this.$store.commit('user/set_role', this.value)
+        this.$store.commit('user/set_role', this.roles[this.value])
       }
     }
   }

@@ -3,8 +3,7 @@ import axios from 'axios'
 
 export const state = () => ({
   register: false,
-  auth: false,
-  skills: []
+  auth: false
 })
 
 
@@ -17,20 +16,10 @@ export const mutations = {
   },
   setSkills(state, value) {
     state.skills = value.map(({id}) => id)
-  }
+  },
 }
 
 export const actions = {
-  async signIn(state, user) {
-    axios
-      .post(process.env.API + '/auth/login', {username: user.login, password: user.password})
-      .then(res => {
-        this.$store.commit("modals/setAuth", false)
-      })
-      .catch(err => {
-        alert("Отсутсвует соединение с сервером: \n" + err)
-      })
-  },
   async signUp(state, user) {
     axios
       .post(process.env.API + '', {

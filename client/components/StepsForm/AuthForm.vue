@@ -4,15 +4,15 @@
 
 
     <div  class='step first'>
-      <div class='logo'/>`
-
+      <div class='logo'/>
+      <span class="error">{{sendError}}</span>
       <div class='form auth'>
         <div class='fields'>
           <TextField required label='Логин' v-model="user.login"/>
           <TextField label='Пароль' type='password' v-model="user.password"/>
         </div>
 
-        <div class='button' @click='$store.dispatch("modals/signIn")'>
+        <div class='button' @click='send()'>
           Войти
         </div>
         <div class='link' @click='$store.commit("modals/setRegister", true)'>
@@ -28,6 +28,7 @@
 import Steps from "./Steps";
 import Logo from "~/components/Logo";
 import TextField from "~/components/StepsForm/TextField";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "AuthForm",
@@ -40,7 +41,17 @@ export default {
         password: ''
       }
     }
-  }
+  },
+  methods: {
+    send() {
+      if (this.user.login !== '' && this.user.password !== '')
+        this.signIn(this.user)
+      else
+        this.$store.commit('user/setError', 'Заполните все поля!')
+    },
+    ...mapActions('user', ['signIn'])
+  },
+  computed: mapGetters('user', ['sendError'])
 }
 </script>
 
@@ -55,6 +66,10 @@ export default {
   position: relative;
   padding-bottom: 64px;
 
+  .error {
+    color: #ff4500;
+    padding: 0 0 15px;
+  }
   .button {
     display: flex;
     align-items: center;
@@ -68,7 +83,6 @@ export default {
     width: 100%;
     cursor: pointer;
   }
-
   .link {
 
     font-weight: 500;
@@ -78,7 +92,6 @@ export default {
     text-align: center;
     cursor: pointer;
   }
-
   .step {
 
     &.first {
@@ -89,7 +102,6 @@ export default {
 
 
   }
-
   .form {
     &.auth {
       width: 240px;
@@ -103,8 +115,6 @@ export default {
       }
     }
   }
-
-
   .logo {
     width: 309px;
     height: 81px;
@@ -113,7 +123,6 @@ export default {
     margin-bottom: 31px;
     margin-top: 48px;
   }
-
   .close {
     position: absolute;
     width: 17px;
