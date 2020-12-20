@@ -17,10 +17,12 @@
         </div>
         <NotificationDropdown class='notification__dropdown' :class='{active: Active}'/>
       </div>
-      <div class='enter'>
+      <a class='enter' href='/profile'>
         <img src='/i_people.png' alt=''>
-        <div class='enter-btn'>{{ name }}</div>
-      </div>
+        <div class='enter-btn'></div>
+
+        <span>{{ name }}</span>
+      </a>
     </div>
   </header>
 </template>
@@ -40,7 +42,7 @@ export default {
   },
   computed: {
     name() {
-      return this?.profile?.first_name || ''
+      return this?.profile?.first_name || 'Профиль'
     },
     ...mapGetters('user', ['current_token', 'profile']),
     ...mapGetters('cards', ['UnreadNotificationsCount']),

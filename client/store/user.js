@@ -16,6 +16,9 @@ export default {
     },
     setError(state, value) {
       state.error = value
+    },
+    setProfile(state, value) {
+      state.profile = value
     }
   },
   state: {
@@ -84,13 +87,14 @@ export default {
         })
     },
     async updateProfile(state) {
+
       axios
         .get(process.env.API + 'lk', {withCredentials: true})
         .then(({data}) => {
-          state.profile = data
+          state.commit('setProfile', data)
         })
         .catch(e => {
-          state.profile = null
+          state.commit('setProfile', null)
         })
     }
   }
