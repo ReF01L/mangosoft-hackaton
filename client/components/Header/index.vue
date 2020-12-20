@@ -39,7 +39,7 @@ export default {
     }
   },
   computed: {
-    name(){
+    name() {
       return this?.profile?.first_name || ''
     },
     ...mapGetters('user', ['current_token', 'profile']),
@@ -125,6 +125,7 @@ header {
         margin: 20px;
       }
     }
+
   }
 
   display: flex;
