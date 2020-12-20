@@ -19,6 +19,7 @@ class CreateNotificationsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->boolean('read')->default(false);
+            $table->string('type')->default('payment');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
         });
