@@ -70,6 +70,8 @@ class LessonService
             ->where('start', '<=', $request->get('start'))
             ->where('end', '>=', $request->get('end'))
             ->get();
+        $cell = $cells->first();
+        $cellId = !$cell ? null : $cell->id;
         $schedule->cells()
             ->where(['mode' => Cell::FREE])
             ->where('start', '<=', $request->get('start'))
@@ -81,7 +83,7 @@ class LessonService
                 'start' => $request->get('start'),
                 'end' => $request->get('end'),
                 'price' => $request->get('price'),
-                'cell_id' => $cells->first()->id,
+                'cell_id' => $cellId,
                 'student_id' => $user->id,
                 'teacher_id' => $teacher->id,
             ]);
