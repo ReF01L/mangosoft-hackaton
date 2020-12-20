@@ -20,7 +20,6 @@
       <a class='enter' href='/profile'>
         <img src='/i_people.png' alt=''>
         <div class='enter-btn'></div>
-
         <span>{{ name }}</span>
       </a>
     </div>

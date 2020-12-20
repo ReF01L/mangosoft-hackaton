@@ -14,6 +14,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "index",
   data() {
@@ -33,8 +35,9 @@ export default {
       this.label = this.options.find(({value}) => value === this.value)?.label;
       this.$store.commit('user/set_role', this.value)
       this.isActive = false
-    }
-  }
+    },
+  },
+  computed: mapGetters('user', ['profile'])
 }
 </script>
 
