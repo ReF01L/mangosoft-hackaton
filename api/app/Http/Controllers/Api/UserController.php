@@ -24,7 +24,7 @@ class UserController extends Controller
         $user = User::where(['username' => $username])->first();
         if (!$user) { return response()->json([], Response::HTTP_NOT_FOUND); }
         return response()->json([
-            'data' => new UserResource($user)
+            'data' => (array) new UserResource($user)
         ], Response::HTTP_OK);
     }
 }
