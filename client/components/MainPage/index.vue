@@ -44,10 +44,12 @@
               Валерий Павлович Петров
             </span>
             <div class="tutors__list-tutor__rank">
-              <span>9.4</span>
+              <span>4.4</span>
               <el-rate
                 v-model="value"
-                :colors="colors">
+                :colors="colors"
+                :disabled="true"
+                :max="5">
               </el-rate>
             </div>
             <div class="tutors__list-tutor-subinfo">
@@ -106,7 +108,7 @@
         search: '',
         cards: [1, 2, 3],
         courses: [1, 2, 3, 4, 5, 6, 7, 8],
-        value: null,
+        value: 4.4,
         colors: ['#99A9BF', '#F7BA2A', '#FF9900']
       }
     }

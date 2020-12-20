@@ -2,10 +2,11 @@
   <div class="rating">
     <h2 class="rating-title">Рейтинг репетитора</h2>
     <div class="rating__stars">
-      <span>9.4</span>
+      <span>4.4</span>
       <el-rate
         v-model="value2"
-        :colors="colors">
+        :colors="colors"
+        :disabled="true">
       </el-rate>
     </div>
     <span class="rating-students">25 студентов</span>
@@ -17,7 +18,7 @@
     name: "index",
     data() {
       return {
-        value2: null,
+        value2: 4.4,
         colors: ['#99A9BF', '#F7BA2A', '#FF9900']
       }
     }

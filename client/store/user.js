@@ -9,11 +9,15 @@ export default {
     },
   },
   state: {
+    token: '',
     role: TUTOR
   },
   getters: {
     current_role(state) {
       return state.role
+    },
+    current_token(state) {
+      return state.token
     }
   }
 }
