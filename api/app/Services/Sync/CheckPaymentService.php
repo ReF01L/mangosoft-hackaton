@@ -36,8 +36,8 @@ class CheckPaymentService
             $cell->update([
                 'mode' => Cell::FREE
             ]);
+            $entity->delete();
         }
-        $expirePayments->delete();
     }
 
     private static function checkPaymentStatus(DefaultService $client, Lesson $entity)
