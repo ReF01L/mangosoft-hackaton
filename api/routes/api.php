@@ -43,6 +43,9 @@ Route::group([
     Route::get('{username}', [UserController::class, 'show']);
 
     Route::get('{username}/schedule', [ScheduleController::class, 'showByUser']);
+
+    Route::post('{username}/schedule/preview', [ScheduleController::class, 'previewLesson']);
+    Route::post('{username}/schedule', [ScheduleController::class, 'setLesson']);
 });
 
 Route::group([
@@ -56,4 +59,8 @@ Route::group([
     Route::post('', [LkController::class, 'update']);
 
     Route::get('schedule', [ScheduleController::class, 'showByLk']);
+
+    Route::post('schedule', [ScheduleController::class, 'setSchedule']);
+    Route::post('schedule/{id}/update', [ScheduleController::class, 'updateSchedule']);
+    Route::get('schedule/{id}/delete', [ScheduleController::class, 'deleteSchedule']);
 });
