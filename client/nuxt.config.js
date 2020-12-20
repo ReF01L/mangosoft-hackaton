@@ -23,7 +23,9 @@ export default {
    // {src: '~/plugins/DaySpan.js', ssr: false}
     {src: '~/plugins/vue-cal.js', ssr: false}
   ],
-
+  env: {
+    API: process.env.API || 'http://localhost:8080/api/'
+  },
   // Auto import components (https://go.nuxtjs.dev/config-components)
   components: true,
 

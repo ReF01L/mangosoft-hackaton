@@ -113,7 +113,6 @@
 </template>
 <script>
 import _ from 'lodash'
-import BaseCalendar from "@/components/Calendar/BaseCalendar";
 import Overlay from "@/components/Overlay";
 import Close from "@/components/StepsForm/Close";
 import TextField from "@/components/StepsForm/TextField";
@@ -122,7 +121,7 @@ import {mapGetters} from "vuex";
 
 export default {
   name: "TutorCalendar",
-  components: {TextField, Close, Overlay, BaseCalendar},
+  components: {TextField, Close, Overlay},
   data: () => ({
     selectedEvent: null,
     showEventEditDialog: false,

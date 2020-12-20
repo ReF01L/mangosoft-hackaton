@@ -16,7 +16,7 @@ class RoleService extends RegisterService
 {
     const RULES = [
         'common' => [
-            'skills' => 'required|array',
+            'skills' => 'nullable|array',
         ],
         'student' => [
 
@@ -45,7 +45,7 @@ class RoleService extends RegisterService
         try {
             $entity->assignRole(Role::where(['name' => $role])->first());
             $entity->save();
-            RegisterService::saveSkills($role, $entity, $request->get('skills'));
+            RegisterService::saveSkills($role, $entity, $request->get('skills', []));
         } catch (ValidationException $e) {
             return response()->json([], Response::HTTP_FORBIDDEN);
         }

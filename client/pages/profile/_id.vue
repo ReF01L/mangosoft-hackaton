@@ -13,21 +13,24 @@
           </div>
         </div>
       </div>
-      <Schedule v-if="current_role !== 'ORGANIZATION'"/>
+      <Schedule v-if="current_role !== 'ORGANIZATION'">
+        <StudentCalendar/>
+      </Schedule>
+      >
     </div>
   </Page>
 </template>
-
 <script>
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Info from '../components/Info'
-import Recomendations from '../components/Recomendations'
-import Interest from '../components/Interest'
-import Schedule from '../components/Schedule'
-import Courses from '../components/Courses'
-import OrganizationInfo from "../components/OrganizationInfo";
-import RatingProfile from "../components/RatingProfile";
+
+import Header from '~/components/Header'
+import Footer from '~/components/Footer'
+import Info from '~/components/Info'
+import Recomendations from '~/components/Recomendations'
+import Interest from '~/components/Interest'
+import Schedule from '~/components/Schedule'
+import Courses from '~/components/Courses'
+import OrganizationInfo from "~/components/OrganizationInfo";
+import RatingProfile from "~/components/RatingProfile";
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -37,6 +40,7 @@ import Vue from 'vue'
 import Page from "~/components/Page";
 
 import {mapGetters} from 'vuex'
+import StudentCalendar from "@/components/Calendar/StudentCalendar";
 
 Vue.use(Element, {locale})
 Vue.use(ElementUI)
@@ -53,7 +57,8 @@ export default {
     Schedule,
     Page,
     RatingProfile,
-    Courses
+    Courses,
+    StudentCalendar
   },
   computed: mapGetters('user', ['current_role']),
 }
