@@ -17,7 +17,7 @@
     "slug": "^4.0.2"
   },
   "devDependencies": {
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "babel-plugin-component": "^1.1.1",
     "node-sass": "^5.0.0",
     "sass-loader": "^10.1.0",
